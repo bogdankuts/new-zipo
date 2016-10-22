@@ -1,0 +1,11 @@
+.hidden {
+	display: none;
+}
+a {
+	&:hover {
+		text-decoration: none;
+	}
+}
+.modal-content {
+	overflow: hidden;
+}

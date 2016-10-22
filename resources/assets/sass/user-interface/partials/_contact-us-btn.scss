@@ -1,0 +1,30 @@
+#bcf-trigger img {
+	background: linear-gradient(180deg, #93243c, #772533, #4b171b);
+	background-size: 600% 600%;
+
+	-webkit-animation: AnimationName 1s ease infinite;
+	-moz-animation: AnimationName 1s ease infinite;
+	-o-animation: AnimationName 1s ease infinite;
+	animation: AnimationName 1s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+	0%{background-position:50% 0%}
+	50%{background-position:50% 100%}
+	100%{background-position:50% 0%}
+}
+@-moz-keyframes AnimationName {
+	0%{background-position:50% 0%}
+	50%{background-position:50% 100%}
+	100%{background-position:50% 0%}
+}
+@-o-keyframes AnimationName {
+	0%{background-position:50% 0%}
+	50%{background-position:50% 100%}
+	100%{background-position:50% 0%}
+}
+@keyframes AnimationName {
+	0%{background-position:50% 0%}
+	50%{background-position:50% 100%}
+	100%{background-position:50% 0%}
+}

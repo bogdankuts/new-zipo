@@ -1,0 +1,31 @@
+.login_page {
+	background-image: url('../../img/markup/login.jpg');
+	background-size: cover;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	.filter {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: $secondary;
+		opacity: .6;
+	}
+	.login_card {
+		display: table;
+		margin: 18% auto 0 auto;
+		padding: 20px;
+		z-index: 99999;
+		h4 {
+			text-align: center;
+			width: 100%;
+		}
+		.submit_login {
+			float: right;
+		}
+	}
+}

@@ -1,0 +1,33 @@
+.settings-page {
+	.settings_block {
+		float: left;
+		form {
+			width: 100%;
+		}
+		.mdl-textfield {
+			width: 100%;
+			&.time-block {
+				width: 20%;
+				margin-left: 2.5%;
+				margin-right: 2.5%;
+				float: left;
+			}
+		}
+		.actions {
+			width: 100%;
+			float: left;
+			&.lower {
+				margin-top: 30px;
+			}
+		}
+	}
+}
+.import_status_content {
+	display: table;
+	margin: auto;
+}
+.supply-change-page {
+	form {
+		display: inline-block;
+	}
+}

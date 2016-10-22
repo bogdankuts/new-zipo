@@ -1,0 +1,52 @@
+.admin_producer_one_form {
+	width: 100%;
+}
+.item_selected_checkbox {
+	margin-top: 10px;
+	margin-left: 10px;
+	float: left;
+	width: auto;
+}
+.admin_item_menu_trigger {
+	float: right;
+	margin-top: 5px;
+}
+.selected_quantity_fixed_main {
+	height: 45px;
+}
+.selected_quantity_fixed {
+	background-color: $secondary;
+	//width: 930px;
+	padding: 5px 20px;
+	box-shadow: 2px 3px 7px #757171;
+	.affix {
+		top: 0px;
+		z-index: 1000;
+	}
+	.selected_quantity {
+		color: #fff;
+		font-size: 18px;
+		font-weight: bold;
+	}
+}
+.form-control {
+	display: inline-block;
+	width: auto;
+}
+.admin_items_quantity {
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+}
+.select_btns_div {
+	float: right;
+}
+.deselect_all_btn {
+	display: none;
+}
+.items_item_img {
+	float: left;
+	max-height: 206px;
+	max-width: 242px;
+	margin-right: 15px;
+}

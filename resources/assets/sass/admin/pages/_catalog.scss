@@ -1,0 +1,31 @@
+.page-content {
+	.main_content {
+		width: 950px;
+		display: table;
+		margin: auto;
+		.universal_heading {
+			color: $primary;
+		}
+		.catalog_subheading {
+			background-color: $primary;
+			border-color: $primary;
+		}
+		.catalog_hr {
+			width: 99.8%;
+			border-color: $primary;
+		}
+		.catalog_categories {
+			.catalog_category {
+				width: 48%;
+			}
+
+		}
+	}
+}
+.admin_uni_heading {
+	font-size: 24px;
+	color: $primary;
+	margin-left: 25px;
+	width: 100%;
+
+}

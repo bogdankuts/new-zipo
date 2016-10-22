@@ -1,0 +1,41 @@
+.contacts_info_table {
+	tr {
+		height: 39px;
+		line-height: 20px;
+	}
+}
+.contacts_info_table {
+	margin-bottom: 20px;
+	.info_label {
+		font-weight: bold;
+	}
+}
+.contacts_contact_form {
+	padding-left: 15px;
+}
+.contacts_form_table,
+.change_input_register {
+	td {
+		padding-top: 5px;
+		padding-bottom: 15px;
+		padding-right: 5px;
+	}
+}
+.change_input_contacts,
+.change_input_register {
+	width: 250px;
+}
+.contacts_form_body {
+	height: 150px;
+	width: 400px;
+}
+.save_button {
+	text-align: center;
+	display: inline;
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+.main_label {
+	height: 21px;
+	line-height: 18px;
+}

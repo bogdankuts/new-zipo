@@ -1,0 +1,14 @@
+.subcats {
+	padding-left: 15px;
+}
+.subcat {
+	list-style: none;
+	a {
+		color: black;
+		font-size: 16px;
+		font-weight: bold;
+		&:hover {
+			color: black;
+		}
+	}
+}

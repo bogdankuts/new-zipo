@@ -1,0 +1,119 @@
+.watch_details {
+	color: #6f2429;
+	font-size: 16px;
+	font-weight: bold;
+	margin-top: 10px;
+	margin-bottom: 10px; }
+.watch_details:hover {
+	color: #6f2429; }
+
+.watch_by_prod_btn {
+	font-size: 14px;
+	color: #fff;
+	background-color: #6f2429;
+	float: right;
+	margin-bottom: 0;
+	margin-top: 9px; }
+.watch_by_prod_btn:hover {
+	color: #fff;
+	background-color: #963037; }
+
+.watch_by_prod_and_subcat {
+	margin-top: 40px; }
+
+.pdf_all_list ul, .pdf_list ul {
+	list-style-type: none; }
+.pdf_all_list a, .pdf_list a {
+	color: #292929;
+	font-size: 16px;
+	font-weight: bold; }
+.pdf_all_list a:hover, .pdf_list a:hover {
+	color: #292929; }
+
+.pdf_links .head {
+	color: #6f2429;
+	font-size: 16px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	padding-left: 15px; }
+
+.pdf_reader {
+	padding-left: 15px; }
+.pdf_reader a {
+	color: #292929;
+	font-size: 17px;
+	font-weight: bold; }
+.pdf_reader a:hover {
+	color: #292929; }
+.pdf_reader .load {
+	margin-top: 10px; }
+.pdf_reader p {
+	font-size: 15px;
+	display: inherit;
+	margin-bottom: 5px; }
+
+.pdf_links p {
+	font-weight: bold; }
+
+.delete_group_button {
+	float: right;
+	margin-right: 10px;
+	padding-left: 22px;
+	padding-right: 24px; }
+
+.spec_btn_adm {
+	padding-left: 31px;
+	padding-right: 32px; }
+
+.proc_btn_adm {
+	margin-left: 34px; }
+
+.admin_panel_pdf_div {
+	padding-top: 15px;
+	padding-left: 1px;
+	padding-right: 25px; }
+.admin_panel_pdf_div .admin_uni_label {
+	vertical-align: top;
+	margin-right: 57px; }
+.admin_panel_pdf_div .good {
+	margin-top: 20px;
+	margin-bottom: 20px; }
+.admin_panel_pdf_div .good_label {
+	margin-right: 39px; }
+.admin_panel_pdf_div .good_input {
+	width: 219px; }
+.admin_panel_pdf_div .admin_uni_button {
+	margin-bottom: 20px;
+	display: block; }
+.admin_panel_pdf_div .to_pdf {
+	float: right;
+	margin-right: 10px; }
+.admin_panel_pdf_div .category_main_label {
+	margin-right: 84px; }
+.admin_panel_pdf_div .subcat_main_label {
+	margin-right: 59px; }
+.admin_panel_pdf_div .change_item_category_div {
+	margin-bottom: 20px;
+	margin-top: 20px; }
+.admin_panel_pdf_div .change_item_category_div select {
+	width: 220px; }
+.admin_panel_pdf_div .change_item_subcat_div {
+	margin-top: 0; }
+.admin_panel_pdf_div .change_item_subcat_div select {
+	width: 220px; }
+
+.all_pdfs {
+	list-style: none; }
+.all_pdfs li {
+	font-size: 16px;
+	font-weight: bold; }
+.all_pdfs a {
+	color: #292929; }
+.all_pdfs a:hover {
+	color: #292929; }
+
+.del_pdf, .upd_pdf {
+	margin-right: 10px;
+	color: #9dcb20; }
+.del_pdf:hover, .upd_pdf:hover {
+	cursor: pointer; }

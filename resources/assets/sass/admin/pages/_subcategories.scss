@@ -1,0 +1,71 @@
+.admin_main_content--subcategories {
+	padding: 20px;
+	.admin_one_cat_heading {
+		font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+		font-weight: 400;
+		line-height: 1;
+		letter-spacing: -.04em;
+	}
+	.edit {
+		&:hover {
+			color: inherit;
+		}
+	}
+	.admin_uni_label {
+		font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+		font-weight: 300;
+		line-height: 1;
+		letter-spacing: -.04em;
+		&--subheading {
+			font-size: 18px;
+			width: 50%;
+		}
+	}
+
+}
+.add_subcategory {
+	margin-top: -4px;
+	&:focus,
+	&:hover,
+	&:active {
+		outline: none;
+		color: inherit;
+	}
+}
+.add_subcategory_modal {
+	h4 {
+		font-family: "Roboto","Helvetica","Arial",sans-serif;
+	}
+	form {
+		width: 100%;
+		select {
+			width: 100%;
+			margin-top: 10px;
+		}
+		.mdl-textfield {
+			width: 100%;
+		}
+	}
+}
+.admin_catalog_category {
+	width: 100%;
+	float: left;
+	margin-bottom: 30px;
+	.edit,
+	.delete {
+		float: right;
+	}
+}
+.subcats_list {
+	float: left;
+	width: 30%;
+	list-style: none;
+	//padding-left: 0;
+
+}
+.admin_one_cat_heading {
+	margin-bottom: 20px;
+}
+.admin_subcategory {
+	width: 80%;
+}

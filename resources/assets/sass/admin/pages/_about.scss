@@ -1,0 +1,22 @@
+.about {
+	.to_clients {
+		display: table;
+		margin: auto;
+		width: 50%;
+		margin-top: 40px;
+		font-style: italic;
+	}
+	.sub {
+		width: 45%;
+		float: right;
+	}
+	.current_release,
+	.next_release {
+		font-size: 18px;
+		margin-top: 30px;
+		padding: 20px;
+		h4 {
+			width: 100%;
+		}
+	}
+}

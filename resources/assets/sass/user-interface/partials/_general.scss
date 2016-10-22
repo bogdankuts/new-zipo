@@ -1,0 +1,40 @@
+body {
+	font-family: Arial, sans-serif;
+}
+p,h1,h2,h3,h4,h5,a {
+	display: inline-block;
+}
+.universal_heading {
+	color: $darken-primary-color;
+	font-weight: bold;
+	font-size: 18px;
+	text-transform: uppercase;
+	margin-bottom: 10px;
+	padding-left: 15px;
+}
+.main_hr {
+	color: $darken-primary-color;
+	border: 2px solid $darken-primary-color;
+	margin-bottom: 25px;
+	margin-top: 0px;
+	width: 544px;
+}
+@-moz-document url-prefix() {
+	.main_hr_art {
+		color: $darken-primary-color;
+		border: 2px solid $darken-primary-color;
+		margin-bottom: 25px;
+		margin-top: 0px;
+		width: 544px;
+		float: left;
+	}
+}
+.active_cat {
+	text-decoration: underline;
+}
+.form_control {
+	display: inline-block;
+	width: 55px;
+	padding: 0px;
+}
+

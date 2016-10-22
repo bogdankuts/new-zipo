@@ -1,0 +1,15 @@
+label {
+	display: initial;
+}
+.req {
+	&:after  {
+		display: inline-block;
+		content: "*";
+		color: red;
+	}
+}
+a {
+	&:hover {
+		cursor: pointer;
+	}
+}

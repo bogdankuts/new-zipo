@@ -1,0 +1,98 @@
+.one_client {
+	font-family: "Roboto","Helvetica","Arial",sans-serif;
+	margin-right: 12px;
+	margin-bottom: 40px;
+	float: left;
+	.mdl-card__title {
+		height: 90px;
+	}
+	.client_part {
+		.line {
+			width: 100%;
+			overflow: hidden;
+			height: 50px;
+			.heading {
+				width: 45%;
+				float: left;
+				font-weight: 500;
+			}
+			.value {
+				width: 55%;
+				float: right;
+			}
+			a.value {
+				font-size: 14px;
+				color: rgba(0,0,0,.54);
+				&:hover {
+					cursor: pointer;
+					color: rgba(0,0,0,.54);
+				}
+			}
+		}
+	}
+}
+
+.client {
+	h1 {
+		width: 100%;
+		margin-top: 0;
+		margin-bottom: 30px;
+
+	}
+	font-family: "Roboto","Helvetica","Arial",sans-serif;
+	.line {
+		width: 100%;
+		overflow: hidden;
+		.heading {
+			width: 45%;
+			float: left;
+			font-weight: 500;
+		}
+		.value {
+			width: 55%;
+			float: right;
+		}
+		a.value {
+			font-size: 14px;
+			color: rgba(0,0,0,.54);
+			&:hover {
+				cursor: pointer;
+				color: rgba(0,0,0,.54);
+			}
+		}
+	}
+	.main {
+		float: left;
+		width: 50%;
+	}
+	.history {
+		float: right;
+		width: 50%;
+	}
+	.orders {
+		width: 100%;
+		float: left;
+		margin-top: 40px;
+		.one_order {
+			height: auto;
+			width: 100%;
+			margin-left: 0;
+			.order_part {
+				width: 30%;
+			}
+			.items_part {
+				width: 70%;
+				float: right;
+				.mdl-data-table {
+					white-space: initial;
+					td,
+					th {
+						text-align: left;
+					}
+				}
+
+
+			}
+		}
+	}
+}

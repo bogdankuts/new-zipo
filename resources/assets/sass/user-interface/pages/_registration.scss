@@ -1,0 +1,33 @@
+.register {
+	float: right;
+	margin-right: 10px;
+}
+.register_form {
+	padding-left: 15px;
+}
+.reg_button {
+	padding: 0;
+}
+.header_reg_adn_log {
+	float: right;
+	display: inline-block;
+	margin-top: 10px;
+}
+.header_search {
+	position: absolute;
+	top: 137px;
+	width: 225px;
+}
+.input_search {
+	/*width: 225px;*/
+	height: 45px;
+	width: 172px;
+	float: left;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border-right: none;
+}
+.btn_exit {
+	margin-bottom: 20px;
+	margin-left: 10px;
+}

@@ -1,0 +1,241 @@
+.search_submit {
+	display: none;
+}
+.message {
+	width: 100%;
+}
+.logout_link {
+	&:hover {
+		cursor: pointer;
+	}
+}
+.main_heading {
+	//margin-left: 70px;
+	text-align: center;
+	width: 100%;
+}
+.review,
+.items_more_statistic_block,
+.articles_more_statistic_block {
+	width: 100%;
+	padding-bottom: 30px;
+}
+.title {
+	text-align: center;
+	width: 100%;
+}
+.items,
+.articles {
+	width: 50%;
+	float: left;
+	&.only {
+		width: 100%;
+	}
+	.mdl-button {
+		display: table;
+		margin: auto;
+		margin-top: 40px;
+	}
+}
+
+.graph {
+	display: table;
+	margin: auto;
+}
+.items_more_statistic_block,
+.articles_more_statistic_block {
+	//visibility: hidden;
+	//display: none;
+	//.canvas {
+	//	display: block;
+	//	width: 200px;
+	//	height: 200px;
+	//}
+}
+.mdl-menu__item a {
+	color: rgba(0,0,0,.87);
+}
+
+.one_graph {
+	width: 50%;
+	float: left;
+	//margin-right: 3%;
+	a {
+		display: table;
+		margin: auto;
+		&:hover {
+			text-decoration: none;
+		}
+	}
+	.mdl-button {
+		display: table;
+		margin: auto;
+		margin-top: 40px;
+	}
+}
+.mdl-list__item-secondary-action {
+	&:focus {
+		outline: none;
+	}
+}
+.page_heading {
+	width: 100%;
+}
+.latest_orders {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.card-orders {
+	float: left;
+	margin-bottom: 30px;
+	//margin-right: 8px;
+	//margin-left: 8px;
+	width: 45%;
+	margin-left: 2.5%;
+	margin-right: 2.5%;
+	.mdl-card__supporting-text {
+		width: 100%;
+		table {
+			width: 100%;
+		}
+	}
+	.delete_btn {
+		float: right;
+	}
+}
+.notification_icon {
+	font-size: 48px;
+}
+.one_notification {
+	width: 15%;
+	margin-left: .8%;
+	margin-right: .8%;
+	position: relative;
+	margin-bottom: 30px;
+	float: left;
+	.content {
+		display: table;
+		margin: auto;
+		color: rgba(0,0,0,.54);
+		font-size: 1rem;
+		line-height: 18px;
+		overflow: hidden;
+		padding: 16px;
+		.full_block {
+			width: 100%;
+			float: left;
+		}
+	}
+	.mdl-card__supporting-text {
+		width: auto;
+	}
+	.mdl-badge {
+		float: left;
+	}
+}
+.statistics {
+	padding-bottom: 40px;
+	.statistics-count {
+		width: 31%;
+		margin-left: 1%;
+		margin-right: 1%;
+		float: left;
+		.heading {
+			width: 100%;
+			text-align: center;
+		}
+		.value {
+			font-size: 24px;
+			text-align: center;
+			width: 100%;
+			font-weight: bold;
+		}
+		.mdl-button {
+			display: table;
+			margin: 20px auto 0 auto;
+		}
+	}
+
+}
+.eur_rate,
+.set_discount {
+	padding: 20px;
+	position: relative;
+	form {
+		position: absolute;
+		left: 14%;
+		bottom: 20px;
+	}
+	h4 {
+		margin-top: 0;
+		margin-bottom: 130px;
+	}
+	.mdl-textfield {
+		margin-right: 30px;
+	}
+	.import_btn {
+		margin-top: 20px;
+	}
+}
+footer {
+	padding: 30px 20px;
+	text-align: center;
+	color: #9e9e9e;
+	background-color: #424242;
+	p {
+		margin-bottom: 0;
+	}
+}
+.new_admins_list {
+	padding: 20px 30px;
+	&--users {
+		font-size: 14px;
+		.admin-card {
+			width: 45%;
+			margin-left: 2.5%;
+			margin-right: 2.5%;
+			float: left;
+		}
+	}
+	&--items {
+		padding: 20px 20px;
+	}
+}
+.admin-card {
+	width: 30%;
+	margin-left: 1.5%;
+	margin-right: 1.5%;
+	float: left;
+	margin-bottom: 40px;
+	.mdl-card__supporting-text {
+		display: table;
+		margin: auto;
+		table {
+			width: 100%;
+		}
+	}
+	&--articles {
+		min-height: 350px;
+	}
+}
+.new_orders_list {
+	padding: 20px 30px;
+	.card-orders {
+		float: left;
+		margin-bottom: 30px;
+		//margin-right: 8px;
+		//margin-left: 8px;
+		width: 30%;
+		margin-left: 1.5%;
+		margin-right: 1.5%;
+		.mdl-card__supporting-text {
+			width: 100%;
+			table {
+				width: 100%;
+			}
+		}
+		.delete_btn {
+			float: right;
+		}
+	}
+}

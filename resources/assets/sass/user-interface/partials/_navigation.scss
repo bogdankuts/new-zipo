@@ -1,0 +1,18 @@
+.navbar_wraper,
+.nav_header {
+	background: linear-gradient(to top, #702329, #441518);
+}
+.nav_header {
+	display: table;
+	margin: auto;
+	border: none;
+	ul {
+		li {
+			text-decoration: none;
+			list-style: none;
+			display: inline-block;
+			font-size: 18px;
+			font-weight: bold;
+		}
+	}
+}

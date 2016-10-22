@@ -1,0 +1,32 @@
+.container_zipo {
+	width: 1150px;
+	margin: auto;
+	background: url(../../img/markup/header_background.png);
+	background-repeat: no-repeat;
+	background-position: 342px 0px;
+}
+.container_main {
+	width: 1150px;
+	margin: auto;
+	display: table;
+	padding-top: 30px ;
+}
+.item_content,
+.items_content {
+	height: auto;
+}
+.main_content {
+	width: 566px;
+	display: inline-block;
+	box-shadow: 2px 3px 7px #757171;
+	border-radius: 5px;
+	padding: 10px;
+	float: right;
+	height: auto;
+	min-height: 780px;
+}
+.left_sidebar,
+.right_sidebar,
+.main_content {
+	margin-top: 0 ;
+}

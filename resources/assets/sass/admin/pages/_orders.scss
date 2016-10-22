@@ -1,0 +1,225 @@
+.admin_main_content--orders {
+	padding: 20px;
+}
+.one_order {
+	width: 30%;
+	float: left;
+	margin-left: 32px;
+	margin-bottom: 40px;
+	height: 340px;
+	&.active_client {
+		width: 94.7%;
+		.order_part {
+			width: 46%;
+		}
+		.client_part {
+			display: table;
+			.main,
+			.additional {
+				width: 50%;
+				float: left;
+			}
+		}
+	}
+	.title {
+		font-size: 18px;
+		font-weight: bold;
+		text-align: left;
+		//text-align: center;
+		width: 100%;
+	}
+	.mdl-card__supporting-text {
+		width: 100%;
+	}
+	.line {
+		width: 100%;
+		overflow: hidden;
+		.heading {
+			font-weight: 600;
+			float: left;
+			width: 30%;
+
+		}
+		.value {
+			width: 70%;
+			color: inherit;
+			font-size: 14px;
+		}
+	}
+	.order_part {
+		width: 100%;
+		float: left;
+		table {
+			width: 100%;
+		}
+
+	}
+	.client_part {
+		display: none;
+		width: 46%;
+		float: right;
+	}
+	.about_client {
+		float: right;
+	}
+	.client_less {
+		display: none;
+		float: right;
+	}
+}
+//ORDER
+.order {
+	h2 {
+		width: 100%;
+		margin-bottom: 30px;
+		font-family: "Roboto","Helvetica","Arial",sans-serif;
+
+	}
+	.delete_block {
+		float: right;
+		.btn_del {
+		}
+	}
+	.items_item_descript {
+		overflow: hidden;
+	}
+	.result_block {
+		width: 100%;
+		overflow: hidden;
+		margin-top: 30px;
+		p{
+			font-size: 16px;
+			font-weight: 600;
+			font-family: "Roboto","Helvetica","Arial",sans-serif;
+		}
+
+	}
+	.mdl-card {
+		padding: 20px;
+		display: block;
+		.mdl-card__title {
+			padding-left: 0;
+		}
+	}
+	.title {
+		font-size: 18px;
+		font-weight: bold;
+		text-align: left;
+		//text-align: center;
+		width: 100%;
+	}
+	.mdl-card__supporting-text {
+		width: 100%;
+	}
+	.line {
+		width: 100%;
+		overflow: hidden;
+		.heading {
+			font-weight: 600;
+			float: left;
+			width: 30%;
+			&.clients_order {
+				//width: 100%;
+				width: auto;
+				float: left;
+				font-size: 18px;
+				margin-top: 8px;
+				color: $secondary;
+			}
+		}
+		.value {
+			width: 70%;
+		}
+		.value{
+			color: inherit;
+		}
+	}
+	.client_more {
+		float: right;
+	}
+	.order_part {
+		width: 49%;
+		float: left;
+		table {
+			width: 100%;
+		}
+
+	}
+	.client_part {
+		width: 49%;
+		float: right;
+		.main,
+		.additional {
+			width: 50%;
+			float: left;
+		}
+		.additional {
+			//float: right;
+		}
+	}
+	.items_part {
+		width: 100%;
+		margin-top: 50px;
+		float: left;
+		.mdl-data-table {
+			white-space: inherit;
+			width: 100%;
+			td,
+			th {
+				text-align: left;
+			}
+			.title-table {
+				width: 500px;
+			}
+		}
+
+		.final_sum_block {
+			width: 100%;
+			margin-top: 15px;
+			.general_sum {
+				font-size: 18px;
+				float: right;
+				margin-right: 40px;
+				color: $primary;
+				text-transform: uppercase;
+			}
+		}
+	}
+}
+.mdl-card__menu {
+	a.mdl-menu__item {
+		&:hover {
+			color: rgba(0,0,0,.87);
+		}
+	}
+}
+.add_state_modal {
+	.title {
+		font-size: 18px;
+	}
+	form {
+		width: 94%;
+	}
+	.mdl-textfield {
+		width: 80%;
+		float: left;
+	}
+	.save_state,
+	.create_state {
+		float: right;
+		color: $primary;
+		margin-top: 15px;
+		&:hover {
+			color: $primary;
+			cursor: pointer;
+		}
+	}
+	.delete_state {
+		float: right;
+		margin-top: 15px;
+		&:hover {
+			color: inherit;
+		}
+	}
+}
+

@@ -1,0 +1,161 @@
+.admin_article_img_container {
+	//width: 150px;
+	height: 150px;
+	width: 100%;
+}
+.admin_article_min_img {
+	//max-width: 150px;
+	max-width: 100%;
+	max-height: 150px;
+	display: inline-block;
+	vertical-align: middle;
+	display: table;
+	margin: auto;
+}
+.admin_article_heading {
+	width: 100%;
+	float: left;
+	display: block;
+	font-size: 16px;
+	//color: inherit;
+	text-align: center;
+	color: black;
+	a {
+		color: black;
+	}
+}
+.admin_articles_one {
+	width: 250px;
+	height: 315px;
+	padding: 3px;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 20px;
+	//overflow: hidden;
+	box-shadow: 4px 5px 17px #cecece;
+	padding-right: 7px;
+	padding-left: 7px;
+	float: left;
+	a {
+		&:hover {
+			color: inherit;
+		}
+	}
+	.article_more {
+		position: relative;
+		width: 100%;
+		float: left;
+	}
+	.img_block {
+		width: 100%;
+		height: 180px;
+		float: left;
+		overflow: hidden;
+		margin-top: 5px;
+		a {
+			display: table;
+			margin: auto;
+		}
+		img {
+			max-width: 100%;
+			max-height: 180px;
+		}
+	}
+	.admin_article_date {
+		font-size: 16px;
+
+	}
+	.admin_article_title {
+		width: 100%;
+		font-size: 16px;
+		height: 30px;
+		position: relative;
+		a {
+			font-size: 16px;
+			color: black;
+		}
+		&:hover {
+			text-decoration: none;
+			color: black;
+			.admin_article_title_full {
+				display: block;
+				text-decoration: none;
+				color: black;
+			}
+		}
+
+	}
+	.admin_article_title_full {
+		display: none;
+		top: 0px;
+		position: absolute;
+		background-color: #f4f4f4;
+		border-radius: 5px;
+		border: 1px solid #e6e6e6;
+		color: black;
+		text-decoration: none;
+		z-index: 9999;
+	}
+
+}
+.admin_main_content--change-article {
+	padding: 20px;
+	form {
+		width: 100%;
+		float: right;
+	}
+	.admin_uni_label {
+		font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+		font-weight: 300;
+		line-height: 1;
+		letter-spacing: -.04em;
+		&--subheading {
+			font-size: 18px;
+			width: 50%;
+		}
+	}
+	.change_article_title_block {
+		width: 100%;
+		.mdl-textfield {
+			width: 100%;
+		}
+	}
+	.change_article_descript_block {
+		width: 50%;
+		float: left;
+		.mdl-textfield {
+			width: 560px;
+			padding: 0;
+			#cke_ckeditor {
+				width: 546px;
+			}
+		}
+	}
+	.change_article_weight_div {
+		width: 50%;
+		float: right;
+		.mdl-textfield {
+			width: 100%;
+		}
+	}
+	.img_preview {
+		min-height: 140px;
+		max-height: 140px;
+		.items_item_img {
+			max-height: 140px;
+		}
+		margin-bottom: 20px;
+	}
+	.back {
+		float: left;
+	}
+	.save {
+		float: right;
+		margin-left: 20px;
+	}
+	.btn_del {
+		float: right;
+		margin-top: 20px;
+		margin-right: 141px;
+	}
+}

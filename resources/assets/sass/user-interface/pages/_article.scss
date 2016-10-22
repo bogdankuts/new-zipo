@@ -1,0 +1,43 @@
+.article_main_header {
+	display: block;
+	/*margin-left: 15px;*/
+	float: left;
+}
+.article_heading {
+	display: inline-block;
+	width: 316px;
+	margin-left: 15px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #383838;
+}
+.article_date {
+	display: inline-block;
+	margin-right: 10px;
+	margin-left: 5px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #383838;
+}
+.article_minimg {
+	float: right;
+	max-height: 110px;
+	max-width: 110px;
+	margin-bottom: 5px;
+}
+.article_text {
+	font-size: 14px;
+	color: #383838;
+	text-align: justify;
+	white-space: pre-wrap;
+}
+.all_news {
+	font-size: 16px;
+	font-weight: bold;
+	color: #383838;
+	padding-left: 15px;
+	margin-top: 20px;
+}
+.all_news:hover {
+	color: #383838;
+}

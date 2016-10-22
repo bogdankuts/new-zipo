@@ -1,0 +1,28 @@
+.mdl-layout__drawer {
+	.mdl-navigation {
+		.active_nav {
+			background-color: #e0e0e0;
+			color: $primary;
+		}
+	}
+}
+.mdl-navigation__devider {
+	height: 1px;
+	width: 100%;
+	background-color: #e0e0e0;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+.mdl-textfield {
+	&.is-focused {
+		label {
+			//margin-bottom: 0;
+		}
+	}
+}
+.mdl-menu__item  {
+	p {
+		//margin-bottom: 0;
+		display: inline-block;
+	}
+}

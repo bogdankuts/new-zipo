@@ -1,0 +1,30 @@
+.modal-footer {
+	border: none;
+}
+.admin_select_category_div,
+.admin_select_title_div {
+	width: 100%;
+	margin-bottom: 20px;
+	font-family: "Roboto","Helvetica","Arial",sans-serif;
+	font-weight: 300;
+	line-height: 1;
+	letter-spacing: -.04em;
+	label,
+	select {
+		font-family: "Roboto","Helvetica","Arial",sans-serif;
+		font-weight: 300;
+		line-height: 1;
+		letter-spacing: -.04em;
+	}
+	.label_block {
+		width: 20%;
+		float: left;
+		margin-top: 11px;
+	}
+}
+#addToPdf {
+	.form-control {
+		width: 100%;
+		margin-top: 20px;
+	}
+}

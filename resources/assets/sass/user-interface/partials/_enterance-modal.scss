@@ -1,0 +1,22 @@
+.enter-modal {
+	.modal-header {
+		h4 {
+			text-align: center;
+			width: 100%;
+		}
+	}
+	.modal-body {
+		p {
+			text-align: center;
+		}
+		img {
+			display: table;
+			margin: auto;
+			margin-bottom: 30px;
+		}
+	}
+	.closing {
+		font-size: 22px;
+		font-weight: 500;
+	}
+}

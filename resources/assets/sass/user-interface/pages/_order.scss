@@ -1,0 +1,103 @@
+.contents {
+	font-size: 20px;
+	color: #662025;
+}
+.cart_one_item {
+	width: 100%;
+	overflow: hidden;
+	background-color: #f6e8ea;
+	margin-bottom: 20px;
+	padding: 5px;
+}
+.cart_item_name {
+	width: 35%;
+	display: block;
+	float: left;
+}
+.cart_item_price {
+	width: 25%;
+	display: block;
+	float: left;
+}
+.items_item_name_div .cart_item_sum {
+	width: 100%;
+	float: none;
+}
+.cart_item_sum {
+	float: right;
+	width: 20%;
+	display: block;
+}
+.order_form {
+	width: 100%;
+	float: left;
+}
+.order_form .form-control {
+	margin-bottom: 20px;
+}
+.order_form .requisites {
+	///*display: none;*/
+}
+.order_form .delivery_other {
+	display: none;
+}
+.order_form .address {
+	//display: none;
+}
+.payment_method_physic {
+	//display: none;
+}
+.price_with_delivery,
+.price_of_delivery {
+	font-size: 14px;
+	font-weight: bold;
+}
+.price_with_delivery {
+	margin-bottom: 20px;
+}
+.cart_items_block {
+	.one_cart_item {
+		background-color: #f6e8ea;
+		.cart_item_sum {
+			font-weight: bold;
+		}
+	}
+	.bottom_block {
+		.order_in_total {
+			color: $primary-color;
+			float: right;
+			font-weight: bold;
+			font-size: 20px;
+		}
+	}
+}
+.order_step_heading {
+	font-weight: bold;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 16px;
+	width: 100%;
+}
+.step-title {
+	font-size: 18px;
+	float: left;
+	font-weight: bold;
+	text-transform: uppercase;
+	text-align: center;
+}
+.subheading-summary {
+	width: 100%;
+	font-weight: bold;
+	font-size: 18px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.payment-data,
+.contact-data,
+.delivery-data {
+	p {
+		width: 100%;
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+}

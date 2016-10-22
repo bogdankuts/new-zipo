@@ -1,0 +1,29 @@
+.admin_items_footer_main {
+	box-shadow: 2px 3px 7px #757171;
+	margin: auto;
+	margin-bottom: 30px;
+}
+.admin_items_footer {
+	background-color: $secondary;
+	padding: 15px 40px 35px 35px;
+}
+.admin_main_content_items {
+	margin-bottom: 0px;
+}
+.selected_quantity {
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+}
+.change_items_buttons_second {
+	border: 1px solid darken($secondary, 20%);
+	padding: 15px 18px;
+}
+.change_items_buttons_first {
+	@extend .change_items_buttons_second;
+	margin-bottom: 25px;
+}
+.admin_items_footer a {
+	width: 25%;
+	margin-right: 40px;
+}

@@ -1,0 +1,31 @@
+.prod_by_subcat_list {
+	list-style-type: none;
+}
+.prod_by_subcat_list a {
+	color: #292929;
+	font-size: 16px;
+	font-weight: bold;
+	width: 100%;
+}
+.prod_by_subcat_list a p {
+	float: left;
+	margin-top: 9%;
+}
+.prod_by_subcat_list a:hover {
+	color: #292929;
+}
+.prod_by_subcat_list li {
+	overflow: hidden;
+	margin-bottom: 10px;
+	width: 100%;
+}
+.prods_by_subcat_img_wrap {
+	float: right;
+	width: 150px;
+	height: 100px;
+}
+.prods_by_subcat_img {
+	float: right;
+	max-width: 150px;
+	max-height: 100px;
+}
