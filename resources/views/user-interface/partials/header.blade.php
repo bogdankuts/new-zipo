@@ -1,6 +1,6 @@
 @section('header')
-	<div class="snow_container">
-		<div id="snow">
+	<div @if($snow == 1)class="snow_container" @endif>
+		<div @if($snow == 1)id="snow" @endif>
 			<header>
 				<hr class="header_top_hr">
 				<div class="container_zipo">
@@ -10,9 +10,11 @@
 							<p class="header_phone">тел. {{$s_phone->value}}</p>
 						</div>
 						<a href="/" class="logo_header">
-							{{--{{ Html::image("img/markup/logo.png", "ЗипОбщепит", ['class'=>'logo_header']) }}--}}
-							{{--WINTER LOGO--}}
-							{{ Html::image("img/markup/logo_winter.png", "ЗипОбщепит", ['class'=>'logo_header']) }}
+							@if($snow == 0)
+								{{ Html::image("img/markup/logo.png", "ЗипОбщепит", ['class'=>'logo_header']) }}
+							@else
+								{{ Html::image("img/markup/logo_winter.png", "ЗипОбщепит", ['class'=>'logo_header']) }}
+							@endif
 						
 						</a>
 					</div>
@@ -42,31 +44,6 @@
 									<p class="message_text start_text">при<br><a href="/registration" class="alert-link">регистрации</a></p>
 								</div>
 							@endif
-							{{--<div class="modal fade header_login" tabindex="-1" role="dialog" id="loginModal">--}}
-								{{--<div class="modal-dialog" role="document">--}}
-									{{--{{ Form::open(['url'=>'/user_login', 'method'=>'POST', 'class'=>'login_form input-group']) }}--}}
-										{{--<div class="modal-content">--}}
-											{{--<div class="modal-header">--}}
-												{{--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--}}
-												{{--<p class="login_form_title">Вход на сайт</p>--}}
-											{{--</div>--}}
-											{{--<div class="modal-body">--}}
-												{{--<div class="form-group">--}}
-													{{--{{ Form::label('email', 'E-mail', ['class'=>'login_form_label login_label_email']) }}--}}
-													{{--{{ Form::email('email', null, ['class'=>'login_input', 'required', 'placeholder'=>"Ваш e-mail", 'class'=>'login_form_input form-control login_form_input_email']) }}--}}
-												{{--</div>--}}
-												{{--<div class="form-group">--}}
-													{{--{{ Form::label('password', 'Пароль', ['class'=>'login_form_label login_label_password']) }}--}}
-													{{--{{ Form::password('password', ['class'=>'login_input', 'required', 'placeholder'=>"Ваш пароль", 'class'=>'login_form_input form-control login_form_input_password']) }}--}}
-												{{--</div>--}}
-											{{--</div>--}}
-											{{--<div class="modal-footer">--}}
-												{{--{{ Form::submit('Войти', ['type' => 'button', 'class'=>'btn submit_field login_form_button']) }}--}}
-											{{--</div>--}}
-										{{--</div>--}}
-									{{--{{ Form::close() }}--}}
-								{{--</div>--}}
-							{{--</div>--}}
 						@endif
 						{{ Form::open(array('url' => "/search", 'method' => 'GET', 'class'=>'header_search')) }}
 						{{ Form::text('query', null, ['placeholder'=>"Поиск по каталогу", 'class'=>'form-control input_search', 'id' =>'search']) }}

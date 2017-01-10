@@ -1,29 +1,9 @@
-//.new-year-wrapper {
-//	background-image: url(../../img/markup/new-year-03.jpg);
-//	//background-repeat: repeat-y;
-//	//background-size: cover;
-//	background-size: auto;
-//	background-position: 50% 0;
-//	position: fixed;
-//	z-index: 10;
-//	top: 0;
-//	right: 0;
-//	left: 0;
-//	display: block;
-//	height: 100%;
-//	//background-position: center top;
-//	background-repeat: no-repeat;
-//	background-size: cover;
-//	overflow: hidden;
-//	//text-indent: -9999px;
-//}
 .header_search {
 	.search_btn {
 		color: black;
 	}
 }
 .bg_banner {
-	//background-image: url(../../img/markup/new-year-4.jpeg);
 	background-image: url(../../img/markup/new-year-03.jpg);
 	background-color: #000;
 	background-size: cover;
@@ -76,11 +56,11 @@ footer {
 	.header_descriprion_heading {
 		color: #ffffff;
 	}
+	.container_zipo {
+		background-image: none;
+	}
 }
 
-.container_zipo {
-	background-image: none;
-}
 
 .greetings {
 	text-align: center;
@@ -108,19 +88,6 @@ footer {
 	-ms-animation: snow 20s linear infinite;
 	animation: snow 20s linear infinite;
 }
-//#snow_footer {
-//	background-image: url('http://www.wearewebstars.dk/codepen/img/s1.png'), url('http://www.wearewebstars.dk/codepen/img//s2.png'), url('http://www.wearewebstars.dk/codepen/img//s3.png');
-//	height: 100%;
-//	left: 0;
-//	position: relative;
-//	top: 0;
-//	width: 100%;
-//	z-index:1;
-//	-webkit-animation: snow 10s linear infinite;
-//	-moz-animation: snow 10s linear infinite;
-//	-ms-animation: snow 10s linear infinite;
-//	animation: snow 10s linear infinite;
-//}
 @keyframes snow {
 	0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
 	50% {background-position: 500px 500px, 100px 200px, -100px 150px;}

@@ -1,13 +1,15 @@
 @section('footer')
 	<footer>
 		<div class="full_screen">
-			<div id="snow">
+			<div @if($snow == 1) id="snow" @endif>
 				<div class="container_zipo" >
 					<a href="/" class="logo_footer">
 						{{ Html::image("img/markup/logo_footer.jpg", "logo", ['class'=>'logo_footer_i']) }}
 					</a>
 					<nav class="nav_footer">
-						<p class="greetings"> Компания Зип Общепит желает Вам хорошего Нового Года и счастливого Рождества!
+						@if($snow == 1)
+							<p class="greetings"> Компания Зип Общепит желает Вам хорошего Нового Года и счастливого Рождества!</p>
+						@endif
 						<ul class="nav_footer_ul">
 							<li class="@if ($env == 'catalog' || $env == 'byproducer' || $env == 'search') active @endif">
 								<a href="/">Каталог</a>
