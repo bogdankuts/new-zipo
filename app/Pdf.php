@@ -51,6 +51,15 @@ class Pdf extends Model {
 		          ->orderBy('good', 'asc')
 		          ->get();
 	}
+	
+	public static function allByProducerSubcat($subcat, $producer) {
+		
+		return Pdf::with(['producer', 'subcat'])
+		          ->where('subcat_id', $subcat)
+				  ->where('producer_id', $producer)
+		          ->orderBy('good', 'asc')
+		          ->get();
+	}
 
 	/**
 	 * Get all pdf files by category and producer
@@ -81,10 +90,12 @@ class Pdf extends Model {
 
 	public static function allPdf() {
 
-		return Pdf::with('subcat')
-		          ->with('producer')
-		          ->orderBy('good', 'asc')
-		          ->paginate(40);
+		return Pdf::with('producer')
+		          ->with('subcat')
+		          ->orderBy('pdf_id', 'desc')
+			      //->take(1)
+			      ->get();
+			      //->paginate(40);
 
 	}
 
@@ -102,5 +113,9 @@ class Pdf extends Model {
 		   ->delete();
 		\Storage::delete("pdf/".$pdf->file);
 		$pdf->delete();
+	}
+	
+	public static function resetSubcategory($subcatId) {
+		Pdf::where('subcat_id', $subcatId)->update(['subcat_id' => 0]);
 	}
 }

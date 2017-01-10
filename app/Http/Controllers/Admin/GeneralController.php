@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Item;
 use App\Pdf;
+use App\Sale;
 use App\Supply;
 use Illuminate\Http\Request;
 
@@ -31,6 +32,7 @@ class GeneralController extends Controller {
 				'items'         => Item::getItemsByQueryAdmin(),
 				'current'	    => $query,
 				'procurements'  => Supply::all(),
+			    'sales'         => Sale::all()
 			]);
 		}
 	}

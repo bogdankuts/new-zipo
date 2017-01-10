@@ -33,34 +33,38 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="mdl-card__menu">
-					<button id="{{$admin->cred_id}}-menu-trigger"
-							class="mdl-button mdl-js-button mdl-button--icon">
-						<i class="material-icons">more_vert</i>
-					</button>
-					<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-						for="{{$admin->cred_id}}-menu-trigger">
-						<a href="{{route('change_admin', [$admin->cred_id])}}" class="mdl-menu__item">
-							Изменить
-						</a>
-						{{Form::open(['url'=>route('delete_admin', [$admin->cred_id]), 'method'=>'POST', 'class'=>'delete_admin_form'])}}
-						{{Form::hidden('admin_id', $admin->cred_id)}}
-						<li class="mdl-menu__item js_trigger_closet_form">
-							Удалить
-						</li>
-						{{Form::close()}}
-					</ul>
-				</div>
+				@if (Auth::guard('admin')->user()->master)
+					<div class="mdl-card__menu">
+						<button id="{{$admin->cred_id}}-menu-trigger"
+								class="mdl-button mdl-js-button mdl-button--icon">
+							<i class="material-icons">more_vert</i>
+						</button>
+						<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+							for="{{$admin->cred_id}}-menu-trigger">
+							<a href="{{route('change_admin', [$admin->cred_id])}}" class="mdl-menu__item">
+								Изменить
+							</a>
+							{{Form::open(['url'=>route('delete_admin', [$admin->cred_id]), 'method'=>'POST', 'class'=>'delete_admin_form'])}}
+							{{Form::hidden('admin_id', $admin->cred_id)}}
+							<li class="mdl-menu__item js_trigger_closet_form">
+								Удалить
+							</li>
+							{{Form::close()}}
+						</ul>
+					</div>
+				@endif
 			</div>
 		@endforeach
-		<div class="add_btn" id="add_btn">
-			<a href="{{route('create_admin')}}" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-				<i class="material-icons">add</i>
-			</a>
-		</div>
-		<div class="mdl-tooltip mdl-tooltip--top" for="add_btn">
-			Добавить администратора
-		</div>
+		@if (Auth::guard('admin')->user()->master)
+			<div class="add_btn" id="add_btn">
+				<a href="{{route('create_admin')}}" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+					<i class="material-icons">add</i>
+				</a>
+			</div>
+			<div class="mdl-tooltip mdl-tooltip--top" for="add_btn">
+				Добавить администратора
+			</div>
+		@endif
 	</div>
 @stop
 

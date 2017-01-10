@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Item;
 use App\Pdf;
 use App\Producer;
+use App\Sale;
 use App\Subcat;
 use App\Supply;
 use Illuminate\Http\Request;
@@ -29,7 +30,8 @@ class CatalogController extends Controller {
 			'pdfs'		    => Pdf::all(),
 			'procurements'  => Supply::all(),
 			'current'	    => Subcat::find(request()->get('subcat_id')),
-			'items'         => Item::getItemsForAdminCatalog(request()->get('subcat_id'))
+			'items'         => Item::getItemsForAdminCatalog(request()->get('subcat_id')),
+		    'sales'         => Sale::all()
 		]);
 	}
 }

@@ -45,18 +45,22 @@ Route::get('/check',                                ['as' => 'check',           
 Route::get('/all_pdf',                              ['as' => 'all_pdf',             'uses' => "PdfController@allPdf"]);
 Route::get('/all_pdf/{category}',                   ['as' => 'pdf_category',        'uses' => "PdfController@allPdfByCategory"]);
 Route::get('/all_pdf/{category}/{producer}',        ['as' => 'pdf_prod',            'uses' => "PdfController@allPdfByProducer"]);
-Route::get('/all_pdf/{producer}/{subcat}',          ['as' => 'pdf_prod_subcat',     'uses' => "PdfController@allPdfByCategory"]);
+Route::get('/all_pdf/{category}/{producer}/{subcat}',['as' => 'pdf_prod_subcat',     'uses' => "PdfController@allPdfBySubcatProducer"]);
 Route::get('/one_pdf/{category}',                   ['as' => 'one_pdf',             'uses' => "PdfController@onePdf"]);
+
+//SALE
+Route::get('/sale/{sale}',                          ['as' => 'one_sale',             'uses' => "SaleController@oneSale"]);
 
 
 // ADMIN
 Route::group(['namespace' => 'Admin'], function() {
+	Route::get('/admin_login',                                      ['as' => 'admin_login_page',        'uses' => "LoginController@loginPage"]);
 	Route::post('/admin_login',                                     ['as' => 'admin_login',             'uses' => "LoginController@login"]);
 	Route::post('/admin/admin_logout',                              ['as' => 'admin_logout',            'uses' => "LoginController@logout"]);
 
 	Route::group(['prefix'=>'/admin', 'before'=>'auth'], function() {
 		//GENERAL
-		Route::get('/search',                                       ['as' => 'search',                  'uses' => 'GeneralController@search']);
+		Route::get('/search',                                       ['as' => 'admin_search',            'uses' => 'GeneralController@search']);
 
 		// DASHBOARD
 		Route::get('/',                                             ['as' => 'dashboard',               'uses' => 'DashboardController@dashboard']);
@@ -69,6 +73,7 @@ Route::group(['namespace' => 'Admin'], function() {
 		Route::post('/mark-order-as-done/{id}',                     ['as' => 'mark_order_as_done',      'uses' => 'OrdersController@markOrderAsDone']);
 		Route::post('/set-discount',                                ['as' => 'set_discount',            'uses' => 'DashboardController@setDiscount']);
 		Route::post('/set-eur-rate',                                ['as' => 'set_eur_rate',            'uses' => 'DashboardController@setEurRate']);
+		Route::post('/get-eur-rate',                                ['as' => 'get_eur_rate',            'uses' => 'DashboardController@getCurrentRate']);
 		Route::post('/import',                                      ['as' => 'import',                  'uses' => 'DashboardController@import']);
 
 		// CATALOG
@@ -92,6 +97,9 @@ Route::group(['namespace' => 'Admin'], function() {
 			Route::post('/change-pdf',                              ['as' => 'change_pdf',              'uses' => 'PdfController@ajaxChangePdf']);
 			Route::post('/delete-group',                            ['as' => 'delete_group',            'uses' => 'ItemsController@deleteGroup']);
 			Route::post('/ajax-image',                              ['as' => 'ajax_image',              'uses' => 'ItemController@ajaxItemImage']);
+			Route::post('/multi-images',                            ['as' => 'multi_image',             'uses' => 'ItemController@addPhoto']);
+			Route::post('/multi-images-delete/{photo}',             ['as' => 'multi_image_del',         'uses' => 'ItemController@deletePhoto']);
+			Route::post('/multi-image-delete/{id}/{photo}',         ['as' => 'one_multi_image_del',     'uses' => 'ItemController@deleteExistingPhoto']);
 		});
 
 		// AJAX
@@ -172,12 +180,26 @@ Route::group(['namespace' => 'Admin'], function() {
 			Route::post('/set-work-time',                           ['as' => 'set_time',                'uses' => 'SettingsController@setTime']);
 			Route::post('/set-phones',                              ['as' => 'set_phones',              'uses' => 'SettingsController@setPhones']);
 			Route::post('/set-email',                               ['as' => 'set_email',               'uses' => 'SettingsController@setEmail']);
+			Route::post('/set-markup',                              ['as' => 'set_markup',              'uses' => 'SettingsController@setMarkup']);
+			
 		});
 		Route::group(['prefix'=>'/settings/delivery'], function() {
 			Route::get('/',                                         ['as' => 'admin_delivery',          'uses' => 'DeliveryController@index']);
 			Route::post('/add',                                     ['as' => 'add_delivery',            'uses' => 'DeliveryController@create']);
 			Route::post('/change/{id}',                             ['as' => 'update_delivery',         'uses' => 'DeliveryController@update']);
 			Route::post('/delete/{id}',                             ['as' => 'delete_delivery',         'uses' => 'DeliveryController@delete']);
+		});
+		
+		// SALE
+		Route::group(['prefix'=>'/sale'], function() {
+			Route::get('/list',                                     ['as' => 'admin_sales',             'uses' => 'SaleController@sales']);
+			//Route::get('/create',                                   ['as' => 'create_sale',             'uses' => 'SaleController@create']);
+			//Route::post('/save',                                    ['as' => 'save_sale',               'uses' => 'SaleController@save']);
+			Route::get('/change/{id}',                              ['as' => 'change_sale_page',        'uses' => 'SaleController@change']);
+			Route::post('/delete-from-sale/{item_id}',              ['as' => 'delete_from_sale',        'uses' => 'SaleController@deleteFromSale']);
+			Route::post('/add-to-sale',                             ['as' => 'add_to_sale',             'uses' => 'SaleController@addToSale']);
+			Route::post('/update/{id}',                             ['as' => 'update_sale',             'uses' => 'SaleController@update']);
+			//Route::post('/delete/{id}',                             ['as' => 'delete_sale',             'uses' => 'SaleController@delete']);
 		});
 
 		Route::get('/about',                                        ['as' => 'admin_about',             'uses' => 'GeneralController@about']);
@@ -188,9 +210,92 @@ Route::group(['namespace' => 'Admin'], function() {
 
 });
 
+$middleware = array_merge(\Config::get('lfm.middlewares'), ['Unisharp\Laravelfilemanager\middleware\MultiUser']);
+$prefix = \Config::get('lfm.prefix', 'laravel-filemanager');
+$as = 'unisharp.lfm.';
+$namespace = 'Unisharp\Laravelfilemanager\controllers';
+
+// make sure authenticated
+Route::group(compact('middleware', 'prefix', 'as', 'namespace'), function () {
+
+	// Show LFM
+	Route::get('/', [
+		'uses' => 'LfmController@show',
+		'as' => 'show'
+	]);
+
+	// upload
+	Route::any('/upload', [
+		'uses' => 'UploadController@upload',
+		'as' => 'upload'
+	]);
+
+	// list images & files
+	Route::get('/jsonitems', [
+		'uses' => 'ItemsController@getItems',
+		'as' => 'getItems'
+	]);
+
+	// folders
+	Route::get('/newfolder', [
+		'uses' => 'FolderController@getAddfolder',
+		'as' => 'getAddfolder'
+	]);
+	Route::get('/deletefolder', [
+		'uses' => 'FolderController@getDeletefolder',
+		'as' => 'getDeletefolder'
+	]);
+	Route::get('/folders', [
+		'uses' => 'FolderController@getFolders',
+		'as' => 'getFolders'
+	]);
+
+	// crop
+	Route::get('/crop', [
+		'uses' => 'CropController@getCrop',
+		'as' => 'getCrop'
+	]);
+	Route::get('/cropimage', [
+		'uses' => 'CropController@getCropimage',
+		'as' => 'getCropimage'
+	]);
+
+	// rename
+	Route::get('/rename', [
+		'uses' => 'RenameController@getRename',
+		'as' => 'getRename'
+	]);
+
+	// scale/resize
+	Route::get('/resize', [
+		'uses' => 'ResizeController@getResize',
+		'as' => 'getResize'
+	]);
+	Route::get('/doresize', [
+		'uses' => 'ResizeController@performResize',
+		'as' => 'performResize'
+	]);
+
+	// download
+	Route::get('/download', [
+		'uses' => 'DownloadController@getDownload',
+		'as' => 'getDownload'
+	]);
+
+	// delete
+	Route::get('/delete', [
+		'uses' => 'DeleteController@getDelete',
+		'as' => 'getDelete'
+	]);
+
+	Route::get('/demo', function () {
+		return view('laravel-filemanager::demo');
+	});
+});
+
 //CATALOG
 Route::get('/category/{category}',                  ['as' => 'category',                            'uses' => 'CatalogController@category']);
 Route::get('/producers/{producer_title}',           ['as' => 'items_by_producer',                   'uses' => 'CatalogController@itemsByProducer']);
-//Route::get('/{category}/{subcat}',                  ['as' => 'producers_by_subcat',                 'uses' => 'CatalogController@producersBySubcat']);
-//Route::get('/{category}/{subcat}/{producer}/items', ['as' => 'items_by_subcat_and_producer',        'uses' => 'CatalogController@itemsBySubcatAndProducer']);
-//Route::get('/{category}/{subcat}/{item_title}',     ['as' => 'item',                                'uses' => 'CatalogController@item']);
+Route::get('/{category}/{subcat}',                  ['as' => 'producers_by_subcat',                 'uses' => 'CatalogController@producersBySubcat']);
+Route::get('/{category}/{subcat}/{producer}/items', ['as' => 'items_by_subcat_and_producer',        'uses' => 'CatalogController@itemsBySubcatAndProducer']);
+Route::get('/{category}/{subcat}/{item_title}',     ['as' => 'item',                                'uses' => 'CatalogController@item']);

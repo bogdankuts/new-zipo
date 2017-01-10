@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "66a4b8903d2fdc009fd7fa31adc897c1",
-    "content-hash": "cd0b272413edb7a4ae5e43616deb20b4",
+    "hash": "bc9bbea9b9968d0a60e2af5f55f50217",
+    "content-hash": "a578ca6a6ec0f936557326bc59c03f16",
     "packages": [
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -2268,6 +2268,101 @@
                 "dump"
             ],
             "time": "2016-09-29 14:13:09"
+        },
+        {
+            "name": "tsawler/laravel-filemanager",
+            "version": "0.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tsawler/laravel-filemanager.git",
+                "reference": "c92aefe790a0648db885c830204502b919ff15f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tsawler/laravel-filemanager/zipball/c92aefe790a0648db885c830204502b919ff15f0",
+                "reference": "c92aefe790a0648db885c830204502b919ff15f0",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=5.0.0",
+                "intervention/image": "2.*",
+                "laravelcollective/html": ">=5.1.0",
+                "php": ">=5.5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tsawler\\Laravelfilemanager\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Trevor Sawler",
+                    "email": "trevor.sawler@gmail.com"
+                }
+            ],
+            "description": "A file upload/editor intended for use with Laravel 5 and CKEditor",
+            "time": "2016-05-31 14:01:26"
+        },
+        {
+            "name": "unisharp/laravel-filemanager",
+            "version": "1.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/UniSharp/laravel-filemanager.git",
+                "reference": "ce305e54ca144a0d6fcfa5715dce56771b20ff58"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/UniSharp/laravel-filemanager/zipball/ce305e54ca144a0d6fcfa5715dce56771b20ff58",
+                "reference": "ce305e54ca144a0d6fcfa5715dce56771b20ff58",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=4.2.0",
+                "intervention/image": "2.*",
+                "php": ">=5.4.0"
+            },
+            "suggest": {
+                "ext-gd": "to use GD library based image processing.",
+                "ext-imagick": "to use Imagick based image processing."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Unisharp\\Laravelfilemanager\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Trevor Sawler",
+                    "email": "trevor.sawler@gmail.com"
+                },
+                {
+                    "name": "UniSharp Ltd.",
+                    "email": "unisharp-service@unisharp.com"
+                }
+            ],
+            "description": "A file upload/editor intended for use with Laravel 5 and CKEditor / TinyMCE",
+            "keywords": [
+                "CKEditor",
+                "file",
+                "filemanager",
+                "image",
+                "laravel",
+                "manager",
+                "tinymce",
+                "upload"
+            ],
+            "time": "2016-09-12 02:53:19"
         },
         {
             "name": "vlucas/phpdotenv",

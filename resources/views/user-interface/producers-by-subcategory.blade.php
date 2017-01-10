@@ -32,7 +32,7 @@
 						<a href="{{route('items_by_subcat_and_producer', [str_slug($current->category), str_slug($current->subcat), str_slug($producer->producer)])."?subcat_id=$current->subcat_id&producer_id=$producer->producer_id"}}">
 							<p>{{$producer->producer}}</p>
 							<div class="prods_by_subcat_img_wrap">
-								<img src="/img/photos/producers{{$producer->producer_photo}}" alt="{{$producer->producer}}" class="prods_by_subcat_img">
+								<img src="/img/photos/producers/{{$producer->producer_photo}}" alt="{{$producer->producer}}" class="prods_by_subcat_img">
 							</div>
 						</a>
 					</li>

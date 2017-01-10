@@ -151,7 +151,8 @@ class Order extends Model {
 		$orders = Order::fullActive()
 		               ->orderBy('state', 'asc')
 		               ->orderBy('order_id', 'desc')
-		               ->get();
+		               //->get();
+					   ->paginate(30);
 
 		foreach ($orders as $order) {
 			$order['items'] = $this->getFullOrderItems($order);

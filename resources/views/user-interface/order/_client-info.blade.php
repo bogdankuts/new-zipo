@@ -15,9 +15,9 @@
 		@endif
 		{{ Form::label('phone', 'Телефон: ', ['class'=>'main_label req']) }}
 		@if (Auth::user())
-			{{ Form::text('phone', Auth::user()->phone, ['class'=>'change_input change_input_code form-control', 'required']) }}
+			{{ Form::text('phone', Auth::user()->phone, ['class'=>'change_input change_input_code form-control', 'required', 'data-mask' => '+7 (000) 000-00-00']) }}
 		@else
-			{{ Form::text('phone', null, ['class'=>'change_input change_input_code form-control', 'required']) }}
+			{{ Form::text('phone', null, ['class'=>'change_input change_input_code form-control', 'required', 'data-mask' => '+7 (000) 000-00-00', 'placeholder' => '+7 (812) 987 08 81']) }}
 		@endif
 		{{ Form::label('email', 'E-Mail: ', ['class'=>'main_label req']) }}
 		@if (Auth::user())

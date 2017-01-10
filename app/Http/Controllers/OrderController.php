@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class NewOrderController extends Controller {
+class OrderController extends Controller {
 
 	public function orderPage() {
-
+		
 		return view('user-interface.order.order')->with([
 			'items'		    => $this->getCartItems(),
 			'cartSum'       => $this->countCartSum($this->getCartItems()),
@@ -23,6 +23,7 @@ class NewOrderController extends Controller {
 
 	public function storePart() {
 		$data = request()->all();
+		//$data['phone'] = str_replace(['(', ')', '-', ' '], '', $data['phone']);
 		if (array_key_exists('requisites', $data)) {
 			$fileName = $this->loadRequisitesToServer($data);
 			$data['requisites'] = $fileName;
@@ -44,6 +45,9 @@ class NewOrderController extends Controller {
 		} else {
 
 			$orderData = $this->getStoredOrderData();
+			$orderData = $this->formDelivery($orderData);
+			$orderData = $this->formPayment($orderData);
+			
 			$items = $this->checkForAllDiscounts($cartItems, $orderData['payment']);//77.6
 
 			return view('user-interface.order.order')->with([
@@ -56,6 +60,75 @@ class NewOrderController extends Controller {
 		}
 
 	}
+	
+	/**
+	 * Set payment variable and discount
+	 *
+	 * @param $payment
+	 */
+	private function formPayment($data) {
+		switch ($data['payment']) {
+			case 'card':
+				$data['payment'] = 'Оплата на карту Сбербанка';
+				break;
+			case 'check':
+				$data['payment'] = 'Оплата по счету(юр. лица)';
+				break;
+			case 'physic_check':
+				$data['payment'] = 'Оплата по счету(физ. лица)';
+				break;
+		}
+		
+		return $data;
+	}
+	
+	/**
+	 * Form delivery for order email
+	 *
+	 * @param array $data
+	 *
+	 * @return array
+	 */
+	private function formDelivery(array $data) {
+		switch ($data['delivery']) {
+			case 'self':
+				$data['deliveryNormal'] = 'Самовывоз';
+				break;
+			case 'St.Petersburg_delivery':
+				$data['deliveryNormal'] = 'Доставка По Санкт Петербургу';
+				break;
+			case 'TK_business_lines':
+				$data['deliveryNormal'] = 'Доставка до терминала ТК Деловые Линии в Санкт Петербурге';
+				break;
+			case 'EMC':
+				$data['deliveryNormal'] = 'Доставка EMC до адреса получателя.';
+				break;
+			case 'SDEK':
+				$data['deliveryNormal'] = 'Доставка экспресс почтой СДЭК до адреса получателя.';
+				break;
+			case 'RATEK':
+				$data['deliveryNormal'] = 'Доставка до терминала ТК РАТЭК в Санкт Петербурге.';
+				break;
+			case 'PONY':
+				$data['deliveryNormal'] = 'Доставка экспресс почтой Pony express до адреса получателя.';
+				break;
+			case 'Dimex':
+				$data['deliveryNormal'] = 'Доставка экспресс почтой dimex до адреса получателя.';
+				break;
+			case 'PEK':
+				$data['deliveryNormal'] = 'Доставка до терминала  ПЭК в Санкт Петербурге.';
+				break;
+			case 'MSK':
+				$data['deliveryNormal'] = 'Доставка в Москву (в МКАД) Элайн  экспресс. (1 рабочий день).';
+				break;
+			case 'Other':
+				$data['deliveryNormal'] = 'Другое';
+				break;
+		}
+		
+		return $data;
+	}
+	
 	/**
 	 *
 	 * Put file into the disc directory
@@ -122,7 +195,9 @@ class NewOrderController extends Controller {
 
 		foreach ($items as $item) {
 			$DBPrice = Item::find($item->id)->price;
-			if ($paidWithCard) {
+			if (!$item->sales->isEmpty()) {
+				$item->price = salesPrice($item->price, $item->sales[0]->discount);
+			}elseif ($paidWithCard) {
 				$item->price = (1 - intval($discount) / 100) * $DBPrice;
 			} elseif ($authenticated) {
 				$item->price = discount_price($DBPrice);
@@ -179,12 +254,14 @@ class NewOrderController extends Controller {
 			$cartItem->category = $item->category;
 			$cartItem->subcat = $item->subcat;
 			$cartItem->initialPrice = $item->price;
+			$cartItem->sales = $item->sales;
 			$cartItemPrice = $cartItem->initialPrice;
 
 			if ($cartItem->price !== $cartItemPrice) {
 				$cartItem->price = $cartItemPrice;
 			}
 		}
+		
 
 		return $cartItems;
 	}
@@ -199,13 +276,15 @@ class NewOrderController extends Controller {
 	private function countCartSum($items) {
 		$sum = 0;
 		foreach($items as $item) {
-			if(\Auth::check()) {
+			if(!$item->sales->isEmpty()) {
+				$sum += salesPrice($item->price, $item->sales[0]->discount)*$item->count;
+			} elseif(\Auth::check()) {
 				$sum += discount_price($item->price)*$item->count;
 			} else {
 				$sum += $item->price*$item->count;
 			}
 		}
-
+		
 		return $sum;
 	}
 

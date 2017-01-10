@@ -88,3 +88,12 @@
 		}
 	}
 }
+.items-get-back {
+	width: 100%;
+	float: right;
+	margin-top: 25px;
+	.items_order {
+		background: linear-gradient(to top, #d42330, #a01c24);
+		background: -webkit-linear-gradient(bottom, #d42330, #a01c24);
+	}
+}

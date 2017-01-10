@@ -36,6 +36,7 @@ class AdminOrder extends Mailable
 	    $this->formDiscount($data['registered']);
 	    $this->formPayment($data['payment']);
 	    $this->items = $items;
+	    //dd($this->items);
 	    $this->countOrderSum();
 	    $this->orderId = $orderId;
 	    $this->order = $this->formDelivery($data);
@@ -88,10 +89,10 @@ class AdminOrder extends Mailable
 				$this->discount = Setting::getDiscountCard();
 				break;
 			case 'check':
-				$this->payment = 'Оплата по счету(физ. лица)';
+				$this->payment = 'Оплата по счету(юр. лица)';
 				break;
 			case 'physic_check':
-				$this->payment = 'Оплата по счету(юр. лица)';
+				$this->payment = 'Оплата по счету(физ. лица)';
 				break;
 		}
 	}
@@ -137,7 +138,7 @@ class AdminOrder extends Mailable
 				break;
 			case 'EMC':
 				$data['deliveryNormal'] = 'Доставка EMC до адреса получателя.';
-				$data['deliveryPrice'] = 0;
+				$data['deliveryPrice'] = 9999;
 				break;
 			case 'SDEK':
 				$data['deliveryNormal'] = 'Доставка экспресс почтой СДЭК до адреса получателя.';
@@ -157,7 +158,7 @@ class AdminOrder extends Mailable
 				break;
 			case 'Dimex':
 				$data['deliveryNormal'] = 'Доставка экспресс почтой dimex до адреса получателя.';
-				$data['deliveryPrice'] = 0;
+				$data['deliveryPrice'] = 9999;
 				break;
 			case 'PEK':
 				$data['deliveryNormal'] = 'Доставка до терминала  ПЭК в Санкт Петербурге.';
@@ -169,11 +170,11 @@ class AdminOrder extends Mailable
 				break;
 			case 'MSK':
 				$data['deliveryNormal'] = 'Доставка в Москву (в МКАД) Элайн  экспресс. (1 рабочий день).';
-				$data['deliveryPrice'] = 0;
+				$data['deliveryPrice'] = 9999;
 				break;
 			case 'Other':
 				$data['deliveryNormal'] = 'Другое';
-				$data['deliveryPrice'] = 0;
+				$data['deliveryPrice'] = 9999;
 				break;
 		}
 		$data['sum'] = $this->order['sum'];

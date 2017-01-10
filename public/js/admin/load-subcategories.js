@@ -2,7 +2,7 @@ $category = $('#categoryActive').val();
 if($category === '') {
 	$category = 'Механическое_en';
 }
-$subcategory = $('#subcategoryActive').text();
+$subcategory = $('#subcategoryActive').val();
 
 //	choose active category
 $(document).ready(function() {

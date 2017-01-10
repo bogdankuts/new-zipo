@@ -19,7 +19,9 @@
 			<div class="item-inner item-price">
 				<p class="heading">Цена:</p>
 				<p class="item-price-p" data-id="{{$item->id}}">
-					@if(\Auth::check() && $step != 5)
+					@if(!$item->sales->isEmpty() && $step != 5)
+						{{salesPrice($item->price, $item->sales[0]->discount)}}
+					@elseif(\Auth::check() && $step != 5)
 						{{round(discount_price($item->price))}} руб.
 					@else
 						{{round($item->price)}} руб.
@@ -35,7 +37,9 @@
 				<p>Сумма:</p>
 				<p class="cart_item_sum">
 					<span id="itemTotal_{{$item->id}}">
-						@if(\Auth::check() && $step != 5)
+						@if(!$item->sales->isEmpty() && $step != 5)
+							{{salesPrice($item->price, $item->sales[0]->discount)}}
+						@elseif(\Auth::check() && $step != 5)
 							{{round(discount_price($item->price * $item->count))}}
 						@else
 							{{round($item->price * $item->count)}}

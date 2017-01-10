@@ -160,6 +160,30 @@
 	color: #662025;
 	/*float: right;*/
 }
+.items_item_price_div {
+	&.discounted {
+		position: relative;
+		//width: 50%;
+		.old {
+			p {
+				text-decoration: line-through;
+				color: #a0a0a0;
+				font-size: 12px;
+			}
+			float: left;
+			margin-right: 2px;
+		}
+	}
+}
+.discount-block {
+	position: absolute;
+	width: 100px;
+	top: -20px;
+	right: 00px;
+	color: #662025;
+	font-style: italic;
+	font-weight: bold;
+}
 .items_item_currency {
 	text-transform: lowercase;
 }

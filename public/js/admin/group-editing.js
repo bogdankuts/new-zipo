@@ -276,6 +276,29 @@ $('.change_item_pdf').on('click', function(e) {
 	});
 });
 
+//CHANGE SALE BUTTON
+$('.add_to_sale').on('click', function(e) {
+	var sale_id = $('.admin_select_sale').val();
+	var url = $(this).data('url');
+	$.ajax({
+		url: url,
+		type: 'POST',
+		dataType: "json",
+		data: {
+			'ids' 		: IDS,
+			'sale_id'	: sale_id
+		},
+		success: function(data) {
+			location.reload();
+		},
+		error: function(data, error, error_details){
+			console.log("err:",error, error_details);
+			console.log(data);
+			console.log(JSON.stringify(data.responseText, '\\', ''));
+		}
+	});
+});
+
 //CHANGE PROCUREMENT BUTTON
 $('.change_item_procurement').on('click', function(e) {
 	var supply_id = $('.admin_select_procurement').val();

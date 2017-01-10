@@ -8,7 +8,13 @@
 		<p>Компания - {{$data['company']}}</p>
 		<p>Телефон - {{$data['phone']}}</p>
 		<p>Email - {{$data['email']}}</p>
-		<p>Форма собсвтенности - {{$data['form_of_business']}}</p>
+		<p>Форма собсвтенности -
+			@if ($data['form_of_business'] == 'jura')
+				Юридическое лицо
+			@else
+				Физическое лицо
+			@endif
+		</p>
 	</div>
 	<p class="subheading-summary">Способ оплаты</p>
 	<div class="payment-data">
@@ -20,10 +26,10 @@
 	</div>
 	<p class="subheading-summary">Доставка</p>
 	<div class="delivery-data">
-		<p>Выбранный способ доставки - {{$data['delivery']}}</p>
+		<p>Выбранный способ доставки - {{$data['deliveryNormal']}}</p>
 		<p>Цена доставки -
 			@if($data['deliveryPrice'] == 9999)
-				Стоимость доставки уточнит менеджер.
+				Стоимость доставки пожалуйста уточните у менеджера.
 			@elseif($data['deliveryPrice'] == 0)
 				бесплатно
 			@else
@@ -35,7 +41,7 @@
 			@if($data['deliveryPrice'] != 9999)
 				{{round($data['deliveryPrice'] + $cartSum)}} руб.
 			@else
-				Итоговую сумма уточнит менеджер.
+				Итоговую сумму пожалуйста уточните у менеджера.
 			@endif
 		</p>
 	</div>
@@ -43,7 +49,7 @@
 	@if($data['deliveryPrice'] != 9999)
 		<p>Итоговая сумма - {{round($data['deliveryPrice'] + $cartSum)}} руб.</p>
 	@else
-		<p>Итоговую сумма уточнит менеджер.</p>
+		<p>Итоговую сумму пожалуйста уточните у менеджера.</p>
 	@endif
 	<div class="comment">
 		{{ Form::label('comment', 'Комментарий: ', ['class'=>'main_label']) }}
@@ -54,5 +60,5 @@
 	@else
 		{{ Form::hidden('registered', 0) }}
 	@endif
-{{Form::submit('Подтвердить', ['class'=>'submit_field save_button btn'])}}
+{{Form::submit('Подтвердить', ['class'=>'submit_field save_button btn js-post-order'])}}
 {{Form::close()}}

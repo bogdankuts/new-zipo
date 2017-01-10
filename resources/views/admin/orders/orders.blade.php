@@ -4,7 +4,6 @@
 @extends('admin.modals.add-state')
 
 @section('body')
-{{--	@include('partials/flash_messages')--}}
 	<div class="admin_main_content admin_main_content--orders mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
 		@foreach($orders as $order)
 			<div class="mdl-card mdl-shadow--2dp one_order" id="{{$order->order_id}}">
@@ -130,6 +129,7 @@
 				</div>
 			</div>
 		@endforeach
+		{{$orders->links()}}
 		<div class="add_btn" id="add_btn">
 			<a class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" data-toggle="modal" data-target="#addState">
 				<i class="material-icons">add</i>

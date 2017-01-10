@@ -27,7 +27,7 @@ class DashboardController extends Controller {
 			$notifications = $this->getNotifications($lastVisit);
 
 			$this->updateLastAdminVisit();
-
+			
 			return view('admin.dashboard.dashboard')->with([
 				'lastVisit'             => $lastVisit,
 				'notifications'         => $notifications,
@@ -36,6 +36,7 @@ class DashboardController extends Controller {
 				'mostViewedItems'       => Item::getMostViewedItems(),
 				'mostSellingItems'      => Item::getMostSellingItems(),
 				'rate'                  => $rate->getRate(),
+				'rateIsFixed'           => Rate::checkIfRateIsFixed(),
 				'discount'              => Setting::getDiscount(),
 				'allItems'              => Item::all()->count(),
 				'allArticles'           => Article::all()->count(),
@@ -116,9 +117,10 @@ class DashboardController extends Controller {
 
 	public function setEurRate() {
 		$rate = str_replace(',', '.', request()->get('rate'));
-		Rate::setRate($rate, minutes_left());
+		$fixed = $this->setFixedRate();
+		Rate::setRate($rate, minutes_left(), $fixed);
 
-		return redirect()->route('dashboard')
+		return redirect()->back()
 		               ->with('message', 'Курс евро на текущий день установлен: '.$rate.' рублей за 1 евро.');
 	}
 
@@ -140,6 +142,25 @@ class DashboardController extends Controller {
 			return redirect()->route('dashboard')->withErrors('Excel файл не выбран!');
 		}
 	}
+	
+	public function getCurrentRate() {
+		$rate = new Rate();
+		
+		return $rate->parseRate();
+	}
+	
+	private function setFixedRate() {
+		if (array_key_exists('fixedRate', request()->all())) {
+			$fixed = 1;
+		} else {
+			$fixed = 0;
+		}
+		
+		Rate::makeRateFixed($fixed);
+		
+		return Rate::checkIfRateIsFixed();
+	}
+	
 
 	/**
 	 * Count notification and add to array

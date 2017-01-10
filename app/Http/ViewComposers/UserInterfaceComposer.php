@@ -11,9 +11,10 @@ use Illuminate\View\View;
 class UserInterfaceComposer {
 
 	protected $env = 'catalog';
-	protected $showModal;
+	//protected $showModal;
 	protected $primary_phone;
 	protected $secondary_phone;
+	protected $winterDecoration = 0;
 
 
 	public function __construct() {
@@ -87,7 +88,8 @@ class UserInterfaceComposer {
 			'articles'	=> Article::getSidebarArticles(4),
 			'recent'	=> Recent::readAllRecent(),
 		    'p_phone'   => $this->primary_phone,
-		    's_phone'   => $this->secondary_phone
+		    's_phone'   => $this->secondary_phone,
+		    'snow'      => $this->winterDecoration
 		]);
 
 		//view()->share('user', \Auth::user());

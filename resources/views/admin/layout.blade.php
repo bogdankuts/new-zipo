@@ -46,6 +46,7 @@
 		@yield('modal-add-subcategory')
 		@yield('modal-edit-subcategory')
 		@yield('modal-add-state')
+		@yield('modal-add-to-sale')
 
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		{{ Html::script('js/admin/search.js') }}

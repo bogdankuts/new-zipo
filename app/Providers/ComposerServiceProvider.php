@@ -34,6 +34,7 @@ class ComposerServiceProvider extends ServiceProvider
 		            'pdf-one',
 		            'pdf-by-category',
 		            'order.order',
+		            'sale'
 		];
 
 		foreach ($UIViews as $view) {
@@ -76,6 +77,8 @@ class ComposerServiceProvider extends ServiceProvider
 		               'settings.settings',
 		               'deliveries.deliveries',
 		               'about.about',
+		               'sale.sales',
+		               'sale.change'
 
 		];
 

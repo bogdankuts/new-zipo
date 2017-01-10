@@ -43,7 +43,7 @@
 			<img src="/img/markup/kit.png" alt="KIT" class="delivery_logo">
 			<p><b>Доставка до терминала в г. Санкт Петербург - <a href="http://calc.tk-kit.ru/calc/">ТК КИТ</a> - 200руб.</b></p>
 			<p><p>Тарифы на перевозки грузов, можно посмотреть <a href="http://calc.tk-kit.ru/calc/">тут</a></p></p>
-			<p style="margin-top: 20px;"><b>Посомтреть стоимость доставки на адрес по Санкт-Петерургу можно <a href="/map">тут</a></b></p>
+			<p style="margin-top: 20px;"><b>Посмотреть стоимость доставки на адрес по Санкт-Петерургу можно <a href="/map">тут</a></b></p>
 		</div>
 	</div>
 @stop

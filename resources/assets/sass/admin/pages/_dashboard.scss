@@ -239,3 +239,26 @@ footer {
 		}
 	}
 }
+.current-rate-btn {
+	//float: right;
+	margin-left: 20px;
+}
+.fix-rate {
+	margin-bottom: 20px;
+}
+.cover-no-rights {
+	position: absolute;
+	z-index: 999;
+	background-color: rgba(0, 0, 0, 0.7);
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	p {
+		color: #fff;
+		text-align: center;
+		margin-top: 25%;
+		text-transform: uppercase;
+		font-size: 20px;
+	}
+}

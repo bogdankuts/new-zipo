@@ -118,11 +118,50 @@
 .change_item_buttons,
 .change_item_delete {
 	float: right;
+	width: 50%;
+	.mdl-button, input {
+		float: right;
+	}
+	//position: relative;
+	//top: 420px;
 }
 .clear_item_button {
 	margin-right: 20px;
 }
 .change_item_delete {
-	margin-top: -150px;
-	margin-right: 145px;
+	margin-top: -153px;
+	margin-right: 141px;
+	input {
+		float: right;
+	}
+	width: 20%;
+}
+.delete-existing-images {
+	width: 100%;
+	float: left;
+	.one-photo {
+		width: 20%;
+		margin-left: 1.5%;
+		margin-right: 2.5%;
+		margin-bottom: 40px;
+		position: relative;
+		//float: left;
+		display: inline-block;
+		img {
+			width: 100%;
+		}
+		p {
+			position: absolute;
+			top: 0px;
+			right: 10px;
+			color: black;
+			font-size: 23px;
+			&:hover {
+				cursor: pointer;
+			}
+		}
+	}
+}
+.dropzone {
+	//margin-bottom: 110px;
 }

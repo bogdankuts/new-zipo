@@ -18,6 +18,10 @@
 	@endif
 @stop
 
+@section('css')
+	<link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
+@stop
+
 @section('body')
 	<div class="main_content">
 		<ol class="breadcrumb">
@@ -46,7 +50,13 @@
 					</div>
 				@else
 					<div class="item_price_div">
-						@if (Auth::user())
+						@if(!$item->sales->isEmpty())
+							<div class="old">
+								<p class="item_page_price">{{ceil($item->price)}}&nbsp</p>
+								<p class="item_page_currency">руб.</p>
+							</div>
+							<p class="item_page_price">{{salesPrice($item->price, $item->sales[0]->discount)}}&nbsp</p>
+						@elseif (Auth::user())
 							<p class="item_page_price">{{discount_price($item->price)}}&nbsp</p>
 						@else
 							<p class="item_page_price">{{$item->price}}&nbsp</p>
@@ -56,7 +66,27 @@
 				@endif
 			</div>
 			<div class="item_page_descript">
-				{{ Html::image("img/photos/items/$item->photo", "$item->title", ['class'=>'items_item_img']) }}
+				@if(count($photos) > 0)
+					<div class="fotorama"
+						 data-allowfullscreen="true"
+						 data-nav="thumbs"
+						 data-fit="contain"
+						 data-loop="true"
+						 data-keyboard="true"
+						 data-arrows="true"
+						 data-click="true"
+						 data-swipe="false"
+						 data-width="242">
+						@if($item->photo != "no_photo.png")
+							{{ Html::image("img/photos/items/$item->photo", "$item->title", ['class'=>'items_item_img']) }}
+						@endif
+						@foreach($photos as $photo)
+							<img src="/img/photos/items/{{$item->item_id}}/{{$photo->photo_title}}" alt="">
+						@endforeach	
+					</div>
+				@else
+					{{ Html::image("img/photos/items/$item->photo", "$item->title", ['class'=>'items_item_img']) }}
+				@endif
 				<table class="item_page_text">
 					<tr>
 						<td colspan='2'>Характеристики</td>
@@ -83,7 +113,9 @@
 				<p class="item_page_descr_title">Описание:</p>
 				<p class="item_page_descr_p">{{$item->description}}</p>
 			</div>
-			@if (Auth::user())
+			@if(!$item->sales->isEmpty())
+				<a href="" class="item_order btn btn-default js_item_add" data-id="{{$item->item_id}}" data-price="{{salesPrice($item->price, $item->sales[0]->discount)}}">В корзину</a>
+			@elseif (Auth::user())
 				<a href="" class="item_order btn btn-default js_item_add" data-id="{{$item->item_id}}" data-price="{{discount_price($item->price)}}">В корзину</a>
 			@else
 				<a href="" class="item_order btn btn-default js_item_add" data-id="{{$item->item_id}}" data-price="{{$item->price}}">В корзину</a>
@@ -96,4 +128,8 @@
 
 		</div>
 	</div>
+@stop
+
+@section('page-js')
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB -->
 @stop

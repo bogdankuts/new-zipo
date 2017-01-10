@@ -30,8 +30,17 @@
 						<p class="items_item_currency"></p>
 					</div>
 				@else
-					<div class="items_item_price_div">
-						@if (Auth::user())
+					<div class="items_item_price_div @if(!$item->sales->isEmpty())discounted @endif">
+						@if(!$item->sales->isEmpty())
+							<div class="discount-block">
+								<p>Скидка - {{$item->sales[0]->discount * 100}} %</p>
+							</div>
+							<div class="old">
+								<p class="items_item_price">{{ceil($item->price)}}&nbsp</p>
+								<p class="items_item_currency">руб.</p>
+							</div>
+							<p class="items_item_price">{{salesPrice($item->price, $item->sales[0]->discount)}}&nbsp</p>
+						@elseif (Auth::user())
 							<p class="items_item_price">{{discount_price($item->price)}}&nbsp</p>
 						@else
 							<p class="items_item_price">{{$item->price}}&nbsp</p>
@@ -48,7 +57,11 @@
 					</tr>
 					<tr>
 						<td>Бренд:&nbsp&nbsp&nbsp&nbsp</td>
-						<td class="items_item_dyn_text">{{$item->producer}}</td>
+						@if(\Request::route()->getName() == 'one_pdf')
+							<td class="items_item_dyn_text">{{$item->producer}}</td>
+						@else
+							<td class="items_item_dyn_text">{{$item->producer}}</td>
+						@endif
 					</tr>
 					<tr>
 						<td>Код:</td>
@@ -56,7 +69,11 @@
 					</tr>
 					<tr>
 						<td>Тип:&nbsp</td>
-						<td class="items_item_dyn_text">{{$item->subcat}}</td>
+						@if(\Request::route()->getName() == 'one_pdf')
+							<td class="items_item_dyn_text">{{$item->subcat}}</td>
+						@else
+							<td class="items_item_dyn_text">{{$item->subcat}}</td>
+						@endif
 					</tr>
 					<tr>
 						<td>Наличие:&nbsp</td>
@@ -69,7 +86,9 @@
 			<a href="{{route('item', [str_slug($item->category), str_slug($item->subcat), str_slug($item->title)])."?item_id=$item->item_id"}}" class="btn btn-default items_button items_more">
 				Подробнее
 			</a>
-			@if (Auth::user())
+			@if(!$item->sales->isEmpty())
+				<a href="" class="btn btn-default items_button items_order js_item_add" data-id="{{$item->item_id}}" data-price="{{salesPrice($item->price, $item->sales[0]->discount)}}">В корзину</a>
+			@elseif (Auth::user())
 				<a href="" class="btn btn-default items_button items_order js_item_add" data-id="{{$item->item_id}}" data-price="{{discount_price($item->price)}}">В корзину</a>
 			@else
 				<a href="" class="btn btn-default items_button items_order js_item_add" data-id="{{$item->item_id}}" data-price="{{$item->price}}">В корзину</a>

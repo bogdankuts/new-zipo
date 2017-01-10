@@ -76,6 +76,7 @@ class AdminsController extends Controller {
 		}
 
 		$fields['added_at'] = Carbon::now();
+		$fields['last_visit'] = Carbon::now();
 
 		return $fields;
 	}

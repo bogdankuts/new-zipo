@@ -108,7 +108,42 @@
 				{{ Form::label('rate', 'Курс', ['class'=>'mdl-textfield__label']) }}
 				{{ Form::number('rate', $rate, ['class'=>'mdl-textfield__input', 'required', 'id' => 'rate', 'step' => 0.0001]) }}
 			</div>
+			<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="fixedRate">
+				@if($rateIsFixed)
+					{{ Form::checkbox('fixedRate', true, true, ['class'=>'mdl-switch__input', 'id'=>'fixedRate']) }}
+				@else
+					{{ Form::checkbox('fixedRate', true, false, ['class'=>'mdl-switch__input', 'id'=>'fixedRate']) }}
+				@endif
+				<span class="mdl-switch__label">Зафиксировать курс</span>
+			</label>
+			{{Form::hidden('changed_by', \Auth::guard('admin')->user()->cred_id)}}
 			{{ Form::submit('Изменить', ['class'=>'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent']) }}
+			<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent current-rate-btn" id="js_get_current_rate">Получить текущий курс</a>
+			{{ Form::close() }}
+		</div>
+		<div class="settings_block mdl-cell mdl-cell--12-col">
+			<h4 class="mdl-typography--display-1 main_heading">Наценка</h4>
+			{{ Form::open(['url' => route('set_markup'), 'method' => 'POST', 'class'=>'admin_discount_input']) }}
+			<div class="mdl-textfield time-block mdl-js-textfield mdl-textfield--floating-label">
+				{{ Form::label('markup-less-10', 'Цена ниже 10 евро', ['class'=>'mdl-textfield__label']) }}
+				{{ Form::text('markup-less-10', $markupLess10, ['class'=>'mdl-textfield__input', 'required', 'id' => 'markup-less-10']) }}
+			</div>
+			<div class="mdl-textfield time-block mdl-js-textfield mdl-textfield--floating-label">
+				{{ Form::label('markup-10-25', 'Цена от 10 до 25 евро', ['class'=>'mdl-textfield__label']) }}
+				{{ Form::text('markup-10-25', $markup1025, ['class'=>'mdl-textfield__input', 'required', 'id' => 'markup-10-25']) }}
+			</div>
+			<div class="mdl-textfield time-block mdl-js-textfield mdl-textfield--floating-label">
+				{{ Form::label('markup-25-80', 'Цена от 25 до 80 евро', ['class'=>'mdl-textfield__label']) }}
+				{{ Form::text('markup-25-80', $markup2580, ['class'=>'mdl-textfield__input', 'id' => 'markup-25-80']) }}
+			</div>
+			<div class="mdl-textfield time-block mdl-js-textfield mdl-textfield--floating-label">
+				{{ Form::label('markup-more-80', 'Цена выше 80 евро', ['class'=>'mdl-textfield__label']) }}
+				{{ Form::text('markup-more-80', $markupMore80, ['class'=>'mdl-textfield__input', 'id' => 'markup-more-80']) }}
+			</div>
+			<div class="actions">
+				{{ Form::hidden('changed_by', Auth::guard('admin')->user()->cred_id) }}
+				{{ Form::submit('Изменить', ['class'=>'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent']) }}
+			</div>
 			{{ Form::close() }}
 		</div>
 		<div class="settings_block mdl-cell mdl-cell--12-col">
@@ -122,4 +157,8 @@
 			</div>
 		</div>
 	</div>
+@stop
+
+@section('page-js')
+	{{Html::script('js/admin/get-current-rate.js')}}
 @stop

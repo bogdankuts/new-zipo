@@ -19,6 +19,13 @@
 	color: #662025;
 	text-transform: lowercase;
 }
+.old {
+	.item_page_price,
+	.item_page_currency {
+		color: #a0a0a0;
+		text-decoration: line-through;
+	}
+}
 .up_letter {
 	text-transform: none;
 }
@@ -131,4 +138,10 @@
 		margin-left: 0;
 		margin-right: 6px;
 	}
+}
+.fotorama {
+	float: left;
+	//width: 220px;
+	max-height: 206px;
+	margin-right: 15px;
 }

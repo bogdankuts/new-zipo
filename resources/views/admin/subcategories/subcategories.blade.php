@@ -25,10 +25,10 @@
 										<p class="admin_subcategory">
 											{{ $subcat->subcat }}
 										</p>
-										<a class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect edit" data-toggle="modal" data-target="#{{$subcat->subcat_id}}_edit_modal">
-											<i class="material-icons" data-category='{{ $subcat->category }}'>mode_edit</i>
-										</a>
 										@if (Auth::guard('admin')->user()->master)
+											<a class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect edit" data-toggle="modal" data-target="#{{$subcat->subcat_id}}_edit_modal">
+												<i class="material-icons" data-category='{{ $subcat->category }}'>mode_edit</i>
+											</a>
 											{{ Form::open(array('url' => route('delete_subcategory', [$subcat->subcat_id]), 'method' => 'POST', 'class'=>'admin_subcategory_form delete')) }}
 											<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect delete_items_group_icon">
 												<i class="material-icons">close</i>

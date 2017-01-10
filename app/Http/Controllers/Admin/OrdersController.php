@@ -14,9 +14,7 @@ class OrdersController extends Controller {
 	public function orders() {
 		$orders = new Order();
 		$orders = $orders->getAllOrders();
-		//dd($orders[0]);
-
-
+		
 		return view('admin.orders.orders')->with([
 			'orders'        => $orders,
 			'states'        => State::all()

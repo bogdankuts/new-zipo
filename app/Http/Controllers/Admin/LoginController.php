@@ -20,7 +20,7 @@ class LoginController extends Controller {
 			return redirect()->route('dashboard');
 		} else {
 
-			return redirect()->route('admin_login')->withErrors('Неверный логин или пароль!');
+			return redirect()->back()->withErrors('Неверный логин или пароль!');
 		}
 	}
 
@@ -28,5 +28,10 @@ class LoginController extends Controller {
 		\Auth::guard('admin')->logout();
 
 		return redirect()->route('admin_login');
+	}
+
+	public function loginPage() {
+
+		return view('admin.login.login');
 	}
 }

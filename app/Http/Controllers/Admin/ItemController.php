@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\SaveItemRequest;
 use App\ImageUpload;
 use App\Item;
+use App\MultiImageUpload;
 use App\Producer;
 use App\Rate;
 use App\Supply;
@@ -16,11 +17,13 @@ use Intervention\Image\Facades\Image;
 class ItemController extends Controller {
 
 	public function add() {
+		\Storage::deleteDirectory('img/photos/items/temp');
 
 		return view('admin.item.add')->with([
 			'item'		=> Item::full()->find(request()->get('item_id')),
 			'producers' => Producer::readAllProducers(),
 			'supplies'  => Supply::all(),
+			'photos'    => MultiImageUpload::where('item_id', request()->get('item_id'))->get()
 		]);
 	}
 
@@ -30,15 +33,26 @@ class ItemController extends Controller {
 
 		$item = $this->createItem($fields);
 
+		$photos = \Storage::allFiles('img/photos/items/temp');
+		if(count($photos) > 0) {
+			foreach($photos as $photo) {
+				MultiImageUpload::storeDB($photo, $item->item_id);
+			}
+		}
+
 		return $this->successMessage($item, $itemId);
 	}
 
 	public function change($id) {
+		//dd(Item::full()->find($id));
+		\Storage::deleteDirectory('img/photos/items/temp');
+
 
 		return view('admin.item.change')->with([
 			'item'		=> Item::full()->find($id),
 			'producers' => Producer::readAllProducers(),
 			'supplies'  => Supply::all(),
+		    'photos'    => MultiImageUpload::where('item_id', $id)->get()
 		]);
 	}
 
@@ -46,6 +60,13 @@ class ItemController extends Controller {
 		$fields = $this->convertPriceToEur($this->formFields());
 
 		$item = $this->updateItem($fields, $itemId);
+
+		$photos = \Storage::allFiles('img/photos/items/temp');
+		if(count($photos) > 0) {
+			foreach($photos as $photo) {
+				MultiImageUpload::storeDB($photo, $item->item_id);
+			}
+		}
 
 		return $this->successMessage($item, $itemId);
 	}
@@ -58,6 +79,8 @@ class ItemController extends Controller {
 			$imageUpload->deletePhoto($item->photo);
 		}
 
+		MultiImageUpload::deleteAllPhotosByItemId($item->item_id);
+
 		$item->delete();
 
 		if($route = \Request::route()->getName() == 'delete_item_from_group') {
@@ -67,6 +90,22 @@ class ItemController extends Controller {
 
 			return redirect()->route('catalog_admin')->with('message', 'Товар успешно удален!');
 		}
+	}
+
+	public function addPhoto(Request $request) {
+		$files = $request->file('photo');
+
+		foreach ($files as $file) {
+			MultiImageUpload::upload($file);
+		}
+	}
+
+	public function deletePhoto($photo) {
+		MultiImageUpload::deletePhoto($photo);
+	}
+
+	public function deleteExistingPhoto($itemId, $photo) {
+		MultiImageUpload::deleteExistingPhoto($itemId, $photo);
 	}
 
 	/**
@@ -80,7 +119,7 @@ class ItemController extends Controller {
 		$imageUpload = new ImageUpload();
 		$fields['photo'] = $imageUpload->processPhoto($fields['photo'], $fields['old']);
 		unset($fields['old']);
-
+		
 		return $item = Item::create($fields);
 	}
 

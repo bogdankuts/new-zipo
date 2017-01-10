@@ -30,7 +30,9 @@
 						</div>
 						<div class="item-inner item-price">
 							<p class="heading">Цена:</p>
-							@if(\Auth::check())
+							@if(!$item->sales->isEmpty())
+								<p>{{salesPrice($item->price, $item->sales[0]->discount)}} руб.</p>
+							@elseif(\Auth::check())
 								<p>{{discount_price($item->price)}} руб.</p>
 							@else
 								<p>{{$item->price}} руб.</p>
@@ -43,7 +45,9 @@
 									min="1"
 									class="cart_input form-control countItemsEvent"
 									name="count[{{$item->id}}]" data-id="{{$item->id}}"
-									@if(\Auth::check())
+									@if(!$item->sales->isEmpty())
+										data-price="{{salesPrice($item->price, $item->sales[0]->discount)}}"
+									@elseif(\Auth::check())
 										data-price="{{discount_price($item->price)}}"
 									@else
 										data-price="{{$item->price}}"
@@ -55,7 +59,9 @@
 							<span class="cart_item_sum">
 								Сумма:
 								<span id="itemTotal_{{$item->id}}">
-									@if(\Auth::check())
+									@if(!$item->sales->isEmpty())
+										{{salesPrice($item->price, $item->sales[0]->discount) * $item->count}}
+									@elseif(\Auth::check())
 										{{discount_price($item->price) * $item->count}}
 									@else
 										{{$item->price * $item->count}}
@@ -67,7 +73,9 @@
 							<a href=""
 							   class="btn btn-default items_button items_order js_item_remove"
 							   data-id="{{$item->id}}"
-							   @if(\Auth::check())
+							   @if(!$item->sales->isEmpty())
+							   		data-price="{{salesPrice($item->price, $item->sales[0]->discount)}}"
+							   @elseif(\Auth::check())
 							   		data-price="{{discount_price($item->price)}}"
 							   @else
 							   		data-price="{{$item->price}}"
@@ -87,6 +95,9 @@
 					<p class="general_amount"><span class="totalAmountContainer">0</span>
 					</p><p class="currency">руб.</p>
 					<p></p>
+				</div>
+				<div class="items-get-back">
+					<a href="{{route('index')}}" class="btn btn-default items_button items_order">Вернуться к покупкам</a>
 				</div>
 			</div>
 		</div>

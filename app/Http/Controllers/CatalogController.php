@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Item;
+use App\MultiImageUpload;
 use App\Producer;
 use App\Recent;
 use App\Subcat;
@@ -30,6 +31,7 @@ class CatalogController extends Controller {
 	public function item() {
 		$id = request()->get('item_id');
 		$item = Item::full()->find($id);
+		//dd($item->sales);
 		$item->visits += 1;
 		$item->save();
 		Recent::writeRecentForSession($item);
@@ -38,6 +40,7 @@ class CatalogController extends Controller {
 			'same'		=> Item::getSameItems($item),
 			'item'      => $item,
 			'current'	=> $item->subcat_id,
+			'photos'    => MultiImageUpload::where('item_id', $id)->get()
 		]);
 	}
 

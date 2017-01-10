@@ -45,7 +45,7 @@
 @if(isset($pdf))
 	<div class="change_block change_item_title_block">
 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="file_div">
-			{{ Form::label('file_old', 'Название', ['class'=>'mdl-textfield__label']) }}
+			{{ Form::label('file_old', 'Файл', ['class'=>'mdl-textfield__label']) }}
 			{{ Form::text('file_old', $pdf->file, ['class'=>'mdl-textfield__input', 'id' => 'good', 'disabled']) }}
 		</div>
 	</div>

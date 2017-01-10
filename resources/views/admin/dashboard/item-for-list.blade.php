@@ -8,7 +8,8 @@
 					type="checkbox"
 					id="list-switch-{{$item->item_id}}"
 					data-id="{{$item->item_id}}"
-					class="mdl-switch__input list_make_hit" @if($item->hit === 1) checked @endif
+					class="mdl-switch__input list_make_hit"
+					@if($item->hit == 1) checked @endif
 			/>
 		</label>
 	</span>

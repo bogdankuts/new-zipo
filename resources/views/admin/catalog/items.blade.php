@@ -4,6 +4,7 @@
 @extends('admin.modals.change-item-subcategory')
 @extends('admin.modals.change-item-procurement')
 @extends('admin.modals.add-item-to-pdf')
+@extends('admin.modals.add-to-sale')
 
 @section('body')
 {{--	@include('partials/flash_messages')--}}
@@ -80,18 +81,25 @@
 						<a class=" admin_footer_btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored delete_group_button" data-url="{{route('delete_group')}}">Удалить товары</a>
 					@endif
 				</div>
+				<div class="change_items_buttons_third">
+					<a class=" admin_footer_btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
+					   data-toggle="modal"
+					   data-target="#addToSale">
+						Добавить в распродажу
+					</a>
+				</div>
 			</div>
 		</div>
-		@if($env !=='search')
-			{{$items->appends([
-				'subcat_id' => $current->subcat_id,
-				'sort' => request()->get('sort'),
-				'order' => request()->get('order'),
-				'pages_by' => request()->get('pages_by')
-				])->links()}}
-		@else
-			{{$items->links()}}
-		@endif
+		{{--@if($env !=='search')--}}
+			{{--{{$items->appends([--}}
+				{{--'subcat_id' => $current->subcat_id,--}}
+				{{--'sort' => request()->get('sort'),--}}
+				{{--'order' => request()->get('order'),--}}
+				{{--'pages_by' => request()->get('pages_by')--}}
+				{{--])->links()}}--}}
+		{{--@else--}}
+			{{--{{$items->links()}}--}}
+		{{--@endif--}}
 	</div>
 	<div class="add_btn" id="add_btn">
 		<a href="{{route('add_item')}}" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">

@@ -75,6 +75,11 @@ function discount_price($price) {
 	return ceil($price - $price*$discount/100);
 }
 
+function salesPrice($price, $discount) {
+	
+	return round(floatval($price) * (1-$discount));
+}
+
 /**
  * Create normal category title
  *
@@ -110,6 +115,7 @@ function reverseSlug($title) {
  * @return string
  */
 function unSlug($title) {
+	$normalizedTitle = '';
 	switch ($title) {
 		case 'mekhanicheskoe_en':
 			$normalizedTitle = 'Механическое_en';

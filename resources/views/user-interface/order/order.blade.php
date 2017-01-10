@@ -151,4 +151,5 @@
 
 @section('page-js')
 	{{Html::script('js/user-interface/order.js')}}
+	{{Html::script('js/user-interface/mask.js')}}
 @stop

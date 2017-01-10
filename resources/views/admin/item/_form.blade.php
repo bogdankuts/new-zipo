@@ -1,7 +1,7 @@
 <div class="change_block change_item_title_block">
 	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 		{{ Form::label('title', 'Название', ['class'=>'mdl-textfield__label']) }}
-		{{ Form::text('title', null, ['class'=>'mdl-textfield__input', 'required', 'id' => 'title']) }}
+		{{ Form::text('title', null, ['class'=>'mdl-textfield__input', 'required', 'id' => 'title', 'maxlength'=>'128']) }}
 	</div>
 </div>
 <div class="change_block change_item_title_block">
@@ -38,13 +38,29 @@
 	<div class="change_block change_item_cur_div">
 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 			{{ Form::label('currency', 'Валюта', ['class'=>'admin_uni_label']) }}
-			{{ Form::select('currency', ['РУБ'=>'RUB', 'EUR'=>'EUR'], 'РУБ', ['class'=>'form-control currency_input', 'required']) }}
+			@if (Auth::guard('admin')->user()->login == 'Alexander')
+				@if (isset($item))
+					{{ Form::select('currency', ['РУБ'=>'RUB', 'EUR'=>'EUR'], 'РУБ', ['class'=>'form-control currency_input', 'required']) }}
+				@else
+					{{ Form::select('currency', ['РУБ'=>'RUB', 'EUR'=>'EUR'], 'EUR', ['class'=>'form-control currency_input', 'required']) }}
+				@endif
+			@else
+				{{ Form::select('currency', ['РУБ'=>'RUB', 'EUR'=>'EUR'], 'РУБ', ['class'=>'form-control currency_input', 'required']) }}
+			@endif
 		</div>
 	</div>
 	<div class="change_block change_item_procurement_div">
 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 			{{ Form::label('procurement', 'Наличие', ['class'=>'admin_uni_label producer_label']) }}
-			{{ Form::select('procurement', createOptions($supplies, 'id', 'supply_title'), null, ['class'=>'form-control producer_input', 'required']) }}
+			@if (isset($item))
+				{{ Form::select('procurement', createOptions($supplies, 'id', 'supply_title'), null, ['class'=>'form-control producer_input', 'required']) }}
+			@else
+				@if (Auth::guard('admin')->user()->login == 'Alexander')
+					{{ Form::select('procurement', createOptions($supplies, 'id', 'supply_title'), 3, ['class'=>'form-control producer_input', 'required']) }}
+				@else
+					{{ Form::select('procurement', createOptions($supplies, 'id', 'supply_title'), null, ['class'=>'form-control producer_input', 'required']) }}
+				@endif
+			@endif
 		</div>
 	</div>
 </div>
@@ -56,7 +72,11 @@
 			@if (isset($item))
 				{{ Form:: hidden('categoryActive', $item->category, ['id'=>'categoryActive']) }}
 			@else
-				{{ Form:: hidden('categoryActive', '', ['id'=>'categoryActive']) }}
+				@if (Auth::guard('admin')->user()->login == 'Alexander')
+					{{ Form:: hidden('categoryActive', 'Моечное_en', ['id'=>'categoryActive']) }}
+				@else
+					{{ Form:: hidden('categoryActive', '', ['id'=>'categoryActive']) }}
+				@endif
 			@endif
 		</div>
 	</div>
@@ -144,6 +164,8 @@
 	@endif
 </div>
 <div class="change_item_buttons">
-	<p class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent clear_item_button low_button">Очистить</p>
+	{{ Form::hidden('changed_by', Auth::guard('admin')->user()->cred_id) }}
 	{{ Form::submit('Сохранить', ['class'=>'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent']) }}
+	<p class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent clear_item_button low_button">Очистить</p>
 </div>
+{{--@include('admin.item._multi-image-delete')--}}

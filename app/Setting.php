@@ -22,12 +22,22 @@ class Setting extends Model  {
 	}
 
 	public static function getWorkTime() {
-
 		$times = Setting::find([3,4,5,6,7,8]);
+		
 		foreach ($times as $time) {
 			$result[$time->name] = $time->value;
 		}
 
+		return $result;
+	}
+	
+	public static function getMarkup() {
+		$markups = Setting::find([14,15,16,17]);
+		
+		foreach ($markups as $markup) {
+			$result[$markup->name] = $markup->value;
+		}
+		
 		return $result;
 	}
 

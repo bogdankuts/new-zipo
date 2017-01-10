@@ -46,7 +46,7 @@ class User extends Authenticatable {
 	}
 
 	public function getAllUsers() {
-		$users = User::all();
+		$users = User::orderBy('timestamp', 'desc')->get();
 
 		foreach($users as $user) {
 			$client = Client::where('registered', '=', $user->user_id)->first();

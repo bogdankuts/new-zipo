@@ -5,10 +5,15 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Subcat extends Model {
+	protected $guarded = [];
 	public $primaryKey = "subcat_id";
 
 	protected $fillable = ['subcat', 'category'];
 	public $timestamps = false;
+	
+	public function pdf() {
+		return $this->hasOne(Pdf::class, 'subcat_id', 'subcat_id');
+	}
 
 	public static function readAllSubcats() {
 		$categories = [

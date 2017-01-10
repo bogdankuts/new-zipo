@@ -140,10 +140,10 @@ class UserOrder extends Mailable
 				$this->discount = Setting::getDiscountCard();
 				break;
 			case 'check':
-				$this->payment = 'Оплата по счету(физ. лица)';
+				$this->payment = 'Оплата по счету(юр. лица)';
 				break;
 			case 'physic_check':
-				$this->payment = 'Оплата по счету(юр. лица)';
+				$this->payment = 'Оплата по счету(физ. лица)';
 				break;
 		}
 	}

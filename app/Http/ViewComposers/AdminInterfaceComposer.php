@@ -102,10 +102,10 @@ class AdminInterfaceComposer {
 			case 'admin_pdfs':
 				$this->env = 'pdfs';
 				break;
-			case 'change_pdf':
+			case 'change_pdf_page':
 				$this->env = 'change_pdf';
 				break;
-			case 'add_pdf':
+			case 'create_pdf':
 				$this->env = 'change_pdf';
 				break;
 			case 'admins':
@@ -123,11 +123,17 @@ class AdminInterfaceComposer {
 			case 'admin_delivery':
 				$this->env = 'delivery';
 				break;
-			case 'about':
+			case 'admin_about':
 				$this->env = 'about';
 				break;
-			case 'search':
+			case 'admin_search':
 				$this->env = 'search';
+				break;
+			case 'admin_sales':
+				$this->env = 'admin_sales';
+				break;
+			case 'change_sale_page':
+				$this->env = 'admin_sale_change';
 				break;
 		}
 	}
@@ -231,13 +237,19 @@ class AdminInterfaceComposer {
 				$this->pageTitle = "Результаты поиска";
 				break;
 			case 'admin_about':
-				$this->pageTitle = "Версия 2.0.5";
+				$this->pageTitle = "Версия 3.0.0";
 				break;
 			case 'settings':
 				$this->pageTitle = "Настройки сайта";
 				break;
 			case 'admin_delivery':
 				$this->pageTitle = "Поставки";
+				break;
+			case 'admin_sales':
+				$this->pageTitle = "Распродажи";
+				break;
+			case 'change_sale_page':
+				$this->pageTitle = "Изменение распродажи";
 				break;
 		}
 	}

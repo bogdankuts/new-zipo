@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Pdf;
 use App\Subcat;
 use Illuminate\Http\Request;
 
@@ -49,6 +50,7 @@ class SubcategoriesController extends Controller {
 
 	public function delete($id) {
 		$subcat = Subcat::find($id);
+		Pdf::resetSubcategory($id);
 		$subcat->delete();
 
 		return redirect()->back()->with('message', 'Подкатегория успешно удалена!');

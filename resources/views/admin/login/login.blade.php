@@ -8,7 +8,7 @@
 		<div class='login_section'>
 			<div class="login_card mdl-card mdl-shadow--2dp">
 				<h4>Добро пожаловать!</h4>
-				{{ Form::open(['url' => '/admin_login']) }}
+				{{ Form::open(['url' => route('admin_login'), 'method' => 'POST']) }}
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 					{{ Form::label('login', 'Логин', ['class'=>'mdl-textfield__label']) }}
 					{{ Form::text('login', null, ['class'=>'mdl-textfield__input', 'id' => 'login']) }}

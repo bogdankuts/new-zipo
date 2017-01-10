@@ -36,6 +36,13 @@
 				'order' => request()->get('order'),
 				'pages_by' => request()->get('pages_by')
 				])->links()}}
+		@elseif($env == 'search')
+			{{$items->appends([
+				'query' => $current,
+				'sort' => request()->get('sort'),
+				'order' => request()->get('order'),
+				'pages_by' => request()->get('pages_by')
+				])->links()}}
 		@endif
 
 		@include('user-interface.partials.items.items-pagination')

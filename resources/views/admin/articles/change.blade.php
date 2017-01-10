@@ -17,9 +17,9 @@
 @stop
 @section('page-js')
 	{{Html::script('ckeditor/ckeditor.js') }}
-	{{Html::script('js/admin/ckeditor-init.js')}}
 	{{Html::script('js/admin/article-clear.js')}}
 	{{Html::script('js/admin/vendor/jquery.ui.widget.js') }}
 	{{Html::script('js/admin/vendor/jquery.fileupload.js') }}
 	{{Html::script('js/admin/article-image-upload.js')}}
+	@include('admin.articles._editor-init')
 @stop

@@ -11,7 +11,8 @@ $(window).on('load', function() {
 	var page_height = $body.height();
 	var sidebar_height = $left_sidebar.height();
 
-	var max = page_height - sidebar_height - 111;
+	var max = page_height - sidebar_height - 273;//111
+	// var max = page_height - sidebar_height - 111;
 	$window.on('scroll', function() {
 		var scroll = $window.scrollTop();
 		// was max-342 +30

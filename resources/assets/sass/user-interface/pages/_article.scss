@@ -30,6 +30,9 @@
 	color: #383838;
 	text-align: justify;
 	white-space: pre-wrap;
+	img {
+		max-width: 100%;
+	}
 }
 .all_news {
 	font-size: 16px;

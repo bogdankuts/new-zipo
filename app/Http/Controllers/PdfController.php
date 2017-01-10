@@ -20,6 +20,7 @@ class PdfController extends Controller {
 	}
 
 	public function allPdfByProducer($category) {
+		
 		$producer = Producer::find(request()->get('producer_id'));
 
 		return view('user-interface.pdf-by-producer')->with([
@@ -36,17 +37,29 @@ class PdfController extends Controller {
 			'pdfs'      => Pdf::allByCategory($category)
 		]);
 	}
+	
+	public function allPdfBySubcatProducer($category) {
+		$producerId = request()->all()['producer_id'];
+		$subcatId = request()->all()['subcat_id'];
+		
+		return view('user-interface.pdf-by-producer')->with([
+			'category'  => $category,
+			'producer'  => Producer::find($producerId),
+			'pdfs'      => Pdf::allByProducerSubcat($subcatId, $producerId)
+		]);
+	}
 
 	public function onePdf($category) {
 		$fileId = request()->get('pdf_id');
 		$file = Pdf::find($fileId);
 		$fileType = substr($file['file'], 0, 3);
+		
 
 		return view('user-interface.pdf-one')->with([
 			'producer'	=> Producer::find(request()->get('producer_id')),
 			'pdf'		=> $file,
 			'file_type' => $fileType,
-			'category' => $category,
+			'category'  => $category,
 			'items'		=> Item::getItemsForPdf($fileId)
 		]);
 	}

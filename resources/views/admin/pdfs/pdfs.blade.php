@@ -19,7 +19,7 @@
 					</div>
 					<div class="line">
 						<p class="heading">Категория</p>
-						<p class="value">{{$pdf->category}}</p>
+						<p class="value">{{$pdf->subcat->category}}</p>
 					</div>
 					<div class="line subcat">
 						<p class="heading">Подкатегория</p>
@@ -54,7 +54,7 @@
 				</div>
 			</div>
 		@endforeach
-			{{$pdfs->links()}}
+{{--			{{$pdfs->links()}}--}}
 		<div class="add_btn" id="add_btn">
 			<a href="{{route('create_pdf')}}" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
 				<i class="material-icons">add</i>

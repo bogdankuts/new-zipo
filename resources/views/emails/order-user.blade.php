@@ -78,11 +78,19 @@
 	</tr>
 	<tr>
 		<td class="main_label">Цена доставки:</td>
-		<td class="change_input change_input_code form-control">{{$order['deliveryPrice']}} руб.</td>
+		@if($order['deliveryPrice'] != 9999)
+			<td class="change_input change_input_code form-control">{{$order['deliveryPrice']}} руб.</td>
+		@else
+			<td class="change_input change_input_code form-control">Стоимость доставки пожалуйста уточните у менеджера.</td>
+		@endif
 	</tr>
 	<tr>
 		<td class="main_label">Общая сумма:</td>
-		<td class="change_input change_input_code form-control">{{round($order['sum']+$order['deliveryPrice'])}} руб.</td>
+		@if($order['deliveryPrice'] != 9999)
+			<td class="change_input change_input_code form-control">{{round($order['sum']+$order['deliveryPrice'])}} руб.</td>
+		@else
+			<td class="change_input change_input_code form-control">Общую сумму пожалуйста уточните у менеджера.</td>
+		@endif
 	</tr>
 		<td class="main_label">Комментарий:</td>
 		<td class="">{{$order['comment']}}</td>

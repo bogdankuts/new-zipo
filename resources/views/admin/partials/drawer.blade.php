@@ -28,13 +28,21 @@
 			<a class="mdl-navigation__link @if ( $env == 'pdfs') active_nav @endif" href="{{route('admin_pdfs')}}">Деталировки</a>
 			<a class="mdl-navigation__link @if ( $env == 'create_pdf' || $env == 'change_pdf' ) active_nav @endif" href="{{route('create_pdf')}}">Добавить деталировку</a>
 			<div class="mdl-navigation__devider"></div>
-
-			<a class="mdl-navigation__link @if ( $env == 'settings') active_nav @endif" href="{{route('settings')}}">Настройки</a>
-			<a class="mdl-navigation__link @if ( $env == 'delivery') active_nav @endif" href="{{route('admin_delivery')}}">Поставки</a>
+			
+			<a class="mdl-navigation__link @if ( $env == 'admin_sales') active_nav @endif" href="{{route('admin_sales')}}">Распродажи</a>
+{{--			<a class="mdl-navigation__link @if ( $env == 'create_sale' || $env == 'change_pdf' ) active_nav @endif" href="{{route('create_pdf')}}">Добавить деталировку</a>--}}
 			<div class="mdl-navigation__devider"></div>
+			
+			@if (Auth::guard('admin')->user()->master)
+				<a class="mdl-navigation__link @if ( $env == 'settings') active_nav @endif" href="{{route('settings')}}">Настройки</a>
+				<a class="mdl-navigation__link @if ( $env == 'delivery') active_nav @endif" href="{{route('admin_delivery')}}">Поставки</a>
+			<div class="mdl-navigation__devider"></div>
+			@endif
 
 			<a class="mdl-navigation__link @if ( $env == 'admins') active_nav @endif" href="{{route('admins')}}">Администраторы</a>
-			<a class="mdl-navigation__link @if ( $env == 'create_admin' || $env == 'change_admin') active_nav @endif" href="{{route('create_admin')}}">Добавить администратора</a>
+			@if (Auth::guard('admin')->user()->master)
+				<a class="mdl-navigation__link @if ( $env == 'create_admin' || $env == 'change_admin') active_nav @endif" href="{{route('create_admin')}}">Добавить администратора</a>
+			@endif
 			<div class="mdl-navigation__devider"></div>
 
 			<a class="mdl-navigation__link" href="{{route('admin_about')}}"><i class="material-icons">help_outline</i></a>

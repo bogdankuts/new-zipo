@@ -16,6 +16,11 @@
 		</div>
 		{{ Form::submit('Изменить', ['class'=>'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent']) }}
 		{{ Form::close() }}
+		@if(!Auth::guard('admin')->user()->master)
+			<div class="cover-no-rights">
+				<p>Недостаточно прав для совершения действия.</p>
+			</div>
+		@endif
 	</div>
 	<div class="eur_rate mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--4-col">
 		<h4 class="mdl-typography--display-1 main_heading">Текущий курс евро<br />на {{Carbon\Carbon::now()->format('d-m-Y')}}</h4>
@@ -24,8 +29,23 @@
 			{{ Form::label('rate', 'Курс', ['class'=>'mdl-textfield__label']) }}
 			{{ Form::number('rate', $rate, ['class'=>'mdl-textfield__input', 'required', 'id' => 'rate', 'step' => 0.0001]) }}
 		</div>
+		<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect fix-rate" for="fixedRate">
+			@if($rateIsFixed)
+				{{ Form::checkbox('fixedRate', true, true, ['class'=>'mdl-switch__input', 'id'=>'fixedRate']) }}
+			@else
+				{{ Form::checkbox('fixedRate', true, false, ['class'=>'mdl-switch__input', 'id'=>'fixedRate']) }}
+			@endif
+			<span class="mdl-switch__label">Зафиксировать курс</span>
+		</label>
+		{{Form::hidden('changed_by', \Auth::guard('admin')->user()->cred_id)}}
 		{{ Form::submit('Изменить', ['class'=>'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent']) }}
+		<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent current-rate-btn" id="js_get_current_rate">Получить текущий курс</a>
 		{{ Form::close() }}
+		@if(!Auth::guard('admin')->user()->master)
+			<div class="cover-no-rights">
+				<p>Недостаточно прав для совершения действия.</p>
+			</div>
+		@endif
 	</div>
 	<div class="eur_rate mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--4-col">
 		<h4 class="mdl-typography--display-1 main_heading">Импорт</h4>
@@ -63,6 +83,7 @@
 @section('page-js')
 	{{Html::script('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js')}}
 	{{Html::script('js/admin/statistics.js')}}
+	{{Html::script('js/admin/get-current-rate.js')}}
 	{{Html::script('js/admin/notifications.js')}}
 	{{Html::script('js/admin/make-item-hit.js')}}
 	{{Html::script('js/admin/make-order-done.js')}}

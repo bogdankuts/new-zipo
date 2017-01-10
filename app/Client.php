@@ -57,7 +57,7 @@ class Client extends Model {
 	}
 
 	public function getAllClients() {
-		$clients = Client::all();
+		$clients = Client::orderBy('added_at', 'desc')->get();
 
 		foreach($clients as $client) {
 			$client->total_orders = Order::where('client_id', $client->client_id)->count();

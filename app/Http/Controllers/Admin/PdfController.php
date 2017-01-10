@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Pdf;
 use App\Producer;
+use App\Subcat;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -34,7 +35,7 @@ class PdfController extends Controller {
 	}
 
 	public function pdfs() {
-
+		
 		return view('admin.pdfs.pdfs')->with([
 			'pdfs' => Pdf::allPdf(),
 		]);
@@ -70,9 +71,9 @@ class PdfController extends Controller {
 			$type = $this->getFileType($extension);
 			$fileName = $this->createPdfFileName($type, $extension);
 			$fields = $this->formPdfFields($fileName);
-
+			
 			\Storage::putFileAs('pdf', $file, $fileName);
-
+			
 			if ($type == 'img') {
 				$this->addWatermarkPdf($fileName);
 			}
@@ -117,11 +118,11 @@ class PdfController extends Controller {
 	 * @param string $fileName
 	 */
 	private function addWatermarkPdf($fileName) {
-		$watermark_path = public_path().DIRECTORY_SEPARATOR.'photos'.DIRECTORY_SEPARATOR.'watermark.png';
+		$watermark_path = public_path().DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.'photos'.DIRECTORY_SEPARATOR.'watermark.png';
 		$watermark = Image::make($watermark_path);
-		$image = Image::make(public_path().DIRECTORY_SEPARATOR.'pdf'.$fileName);
-
-		// resize watermark TODO::abstract this part?
+		$image = Image::make(public_path().DIRECTORY_SEPARATOR.'pdf'.DIRECTORY_SEPARATOR.$fileName);
+		
+		// resize watermark
 		$width = $image->width();
 		$height = $image->height();
 		$watermark->fit($width, $height);

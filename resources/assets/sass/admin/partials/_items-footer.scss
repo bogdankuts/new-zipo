@@ -23,6 +23,10 @@
 	@extend .change_items_buttons_second;
 	margin-bottom: 25px;
 }
+.change_items_buttons_third {
+	@extend .change_items_buttons_second;
+	margin-top: 25px;
+}
 .admin_items_footer a {
 	width: 25%;
 	margin-right: 40px;

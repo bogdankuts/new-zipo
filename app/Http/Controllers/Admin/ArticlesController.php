@@ -21,14 +21,14 @@ class ArticlesController extends Controller {
 	}
 
 	public function add() {
-		//TODO::fix KCFinder
+		
 		return view('admin.articles.add')->with([
 			'article'	=> Article::find(request()->get('article_id')),
 		]);
 	}
 
 	public function change($id) {
-		//TODO::fix KCFinder
+		
 		return view('admin.articles.change')->with([
 			'article'	=> Article::find($id),
 		]);

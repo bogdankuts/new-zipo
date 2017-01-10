@@ -10,14 +10,22 @@ class Item extends Model {
 	protected $fillable = ['code', 'title', 'description', 'price', 'currency', 'photo', 'hit', 'special', 'subcat_id', 'producer_id', 'procurement', 'visits', 'meta_title', 'meta_description'];
 
 	public function pdfs() {
+		
 		return $this->belongsToMany(Pdf::class);
+	}
+	
+	public function sales() {
+		
+		return $this->belongsToMany(Sale::class, 'item_sale');
 	}
 
 	public function producer() {
+		
 		return $this->hasOne(Producer::class, 'producer_id', 'producer_id');
 	}
 
 	public function subcat() {
+		
 		return $this->hasOne(Subcat::class, 'subcat_id', 'subcat_id');
 	}
 
@@ -56,10 +64,11 @@ class Item extends Model {
 	 * @return float
 	 */
 	public function getPriceAttribute($value) {
-		if($this->currency != 'РУБ' && $this->currency != 'руб' && $this->currency != 'Руб') {
+		$currencies = ['РУБ', 'RUB', 'руб', 'rub', 'Руб', 'Rub', 'Руб.', 'РУБ.'];
+		if(!in_array($this->currency, $currencies)) {
 			$rate = new Rate();
 			$currentRate = $rate->getRate();
-
+			
 			return round(floatval($value)*$currentRate);
 		} else {
 
@@ -152,9 +161,9 @@ class Item extends Model {
 	 */
 	public static function getItemsForPdf($fileId) {
 
-		return Item::with('producer', 'subcat')
-		           ->whereHas('pdfs', function($query) use ($fileId) {$query->where('item_pdf.pdf_id', $fileId);})
-		           ->get();
+		return Item::full()
+		            ->whereHas('pdfs', function($query) use ($fileId) {$query->where('item_pdf.pdf_id', $fileId);})
+		            ->get();
 	}
 
 	/**
@@ -187,6 +196,7 @@ class Item extends Model {
 				}
 			}
 		}
+		
 		arsort($ids);
 		$count = count($ids);
 		if ($count > 10) {
@@ -218,7 +228,7 @@ class Item extends Model {
 	 *
 	 * @return array
 	 */
-	private static function formSortOrderPages(array $defaults = ['title', 'asc', '10']) {
+	private static function formSortOrderPages(array $defaults = ['sort'=>'title', 'order'=>'asc', 'pages_by'=>'10']) {
 		$values = ['sort', 'order', 'pages_by'];
 		$parameters = [];
 		$request = [];

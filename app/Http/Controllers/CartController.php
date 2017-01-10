@@ -31,7 +31,6 @@ class CartController extends Controller {
 		]);
 	}
 
-	//TODO::fix this method to accept steps(Session maybe)
 	public function order() {
 		$data = $this->formOrderData();
 		$orderItems = $this->checkForAllDiscounts($this->getCartItems(), $data['payment']);
@@ -158,9 +157,11 @@ class CartController extends Controller {
 
 			foreach ($items as $item) {
 				$DBPrice = Item::find($item->id)->price;
-
-				if ($paidWithCard) {
-					$item->price = (1-intval($discount)/100)*$DBPrice;
+				
+				if (!$item->sales->isEmpty()) {
+					$item->price = salesPrice($item->price, $item->sales[0]->discount);
+				}elseif ($paidWithCard) {
+					$item->price = (1 - intval($discount) / 100) * $DBPrice;
 				} elseif ($authenticated) {
 					$item->price = discount_price($DBPrice);
 				} else {
@@ -174,7 +175,7 @@ class CartController extends Controller {
 		return redirect()->back()->withErrors('Нет товаров в корзине!');
 
 	}
-
+	
 	/**
 	 * Normalize data  from form
 	 *
@@ -183,6 +184,9 @@ class CartController extends Controller {
 	private function formOrderData() {
 		$dataPost = request()->all();
 		$data = $this->getStoredOrderData();
+		if (!array_key_exists('requisites', $data)) {
+			$data['requisites'] = '';
+		}
 		$data['registered'] = $dataPost['registered'];
 		$data['comment'] = $dataPost['comment'];
 
@@ -229,14 +233,14 @@ class CartController extends Controller {
 			$cartItem->category = $item->category;
 			$cartItem->subcat = $item->subcat;
 			$cartItem->initialPrice = $item->price;
-
+			$cartItem->sales = $item->sales;
 			$cartItemPrice = $cartItem->initialPrice;
 
 			if ($cartItem->price !== $cartItemPrice) {
 				$cartItem->price = $cartItemPrice;
 			}
 		}
-
+		
 		return $cartItems;
 	}
 

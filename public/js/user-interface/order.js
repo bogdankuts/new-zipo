@@ -45,6 +45,10 @@ $(document).ready(function() {
 		$('.delivery_other').slideUp();
 	}
 });
+$('.js-post-order').on('click', function () {
+	$(this).closest('form').submit();
+	$(this).prop('disabled', true);
+});
 $('#delivery').on('change', function() {
 	$value = $(this).val();
 	//$deliveryPrice = $('#full_summ');
@@ -63,7 +67,7 @@ $('#delivery').on('change', function() {
 	}
 
 	if ($value != 'self' && $value != 'PEK' && $value != 'TK_business_lines' && $value != 'RATEK' && $value != 'St.Petersburg_delivery') {
-		$onlyDelivery.text('Стоимость доставки уточнит менеджер.');
+		$onlyDelivery.text('Стоимость доставки пожалуйста уточните у менеджера.');
 		//$deliveryPrice.text('Окончательную стоимость с доставкой уточнит менеджер.');
 		$('.js_currency').text('');
 	} else {

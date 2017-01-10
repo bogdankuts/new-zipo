@@ -1,0 +1,57 @@
+.sale-heading {
+	h2 {
+		color: #6f2429;
+		font-size: 22px;
+		text-align: center;
+		text-transform: uppercase;
+		display: block;
+	}
+	p {
+		text-align: justify;
+		font-size: 18px;
+	}
+}
+.sorry-message {
+	display: block;
+	text-align: center;
+	text-transform: uppercase;
+	color: #6f2429;
+	font-size: 22px;
+}
+.sale-block {
+	background-image: url(../../img/markup/for-sale-2.png);
+	background-color: #ffffff;
+	height: 200px;
+	padding-top: 6px;
+	background-position: 41% 63%;
+	background-repeat: no-repeat;
+	position: relative;
+}
+.sale-title {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	text-align: center;
+	font-size: 36px;
+	//color: #000;
+	color: rgb(140, 0, 0);
+	//background-color: rgba(0, 122, 57, 0.5);
+	//position: relative;
+	//z-index: 222;
+	display: block;
+	//margin-bottom: 30px;
+	//margin-top: 30px;
+	font-family: 'Cormorant Infant', serif;
+	//background-image: url(../../img/markup/for-sale.png);
+	//height: 50px;
+	&:hover,
+	&:focus {
+		text-decoration: none;
+		color: indianred;
+	}
+}
+.container_main {
+	padding-top: 0;
+}

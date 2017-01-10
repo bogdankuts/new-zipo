@@ -16,7 +16,7 @@ use App\Http\Requests;
 class PagesController extends Controller {
 
 	public function indexPage() {
-
+		
 		return view('user-interface.index')->with([
 			'categories'    => $this->createCategories(),
 			'producers'     => Producer::readAllProducers(),
@@ -73,7 +73,7 @@ class PagesController extends Controller {
 
 	public function search() {
 		$query = trim(request()->get('query'));
-
+		
 		return view('user-interface.items')->with([
 			'items'     => Item::getItemsByQuery($query),
 			'current'	=> $query
