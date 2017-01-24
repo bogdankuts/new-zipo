@@ -101,8 +101,8 @@
 <div class="one_row">
 	<div class="change_block change_item_descript_block">
 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-			{{ Form::textarea('description', null, ['class'=>'mdl-textfield__input', 'rows'=>"10", 'id' =>'description']) }}
-			{{ Form::label('description', 'Описание', ['class'=>'mdl-textfield__label']) }}
+			{{ Form::textarea('description', null, ['class'=>'mdl-textfield__input', 'rows'=>"10", 'id' => 'ckeditor']) }}
+{{--			{{ Form::label('description', 'Описание', ['class'=>'mdl-textfield__label']) }}--}}
 		</div>
 	</div>
 	<div class="make_spec_block">
@@ -164,8 +164,19 @@
 	@endif
 </div>
 <div class="change_item_buttons">
+	@if (isset($item->created_by))
+		{{ Form::hidden('created_by', $item->created_by) }}
+	@else
+		{{ Form::hidden('created_by', Auth::guard('admin')->user()->cred_id) }}
+	@endif
 	{{ Form::hidden('changed_by', Auth::guard('admin')->user()->cred_id) }}
+	@if (isset($item->created_at))
+		{{ Form::hidden('created_at', $item->created_at) }}
+	@else
+		{{ Form::hidden('created_at', \Carbon\Carbon::now()) }}
+	@endif
+	{{ Form::hidden('updated_at', \Carbon\Carbon::now()) }}
 	{{ Form::submit('Сохранить', ['class'=>'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent']) }}
-	<p class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent clear_item_button low_button">Очистить</p>
+<p class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent clear_item_button low_button">Очистить</p>
 </div>
 {{--@include('admin.item._multi-image-delete')--}}

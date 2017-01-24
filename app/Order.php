@@ -188,6 +188,29 @@ class Order extends Model {
 
 		return $orders;
 	}
+	
+	public function getOrdersByQueryAdmin() {
+		$query = trim(request()->get('query'));
+		
+		$orders = Order::full()
+					->where('order_id', $query)
+		            ->orWhere('date', 'like', '%'.$query.'%')
+		            ->orWhere('address', 'like', '%'.$query.'%')
+		            ->orWhere('delivery', 'like', '%'.$query.'%')
+		            ->orWhere('state', 'like', '%'.$query.'%')
+		            ->orWhere('clients.name', 'like', '%'.$query.'%')
+		            ->orWhere('clients.surname', 'like', '%'.$query.'%')
+		            ->orderBy('state', 'asc')
+		            ->orderBy('order_id', 'desc')
+		            ->paginate(30);
+		
+		foreach ($orders as $order) {
+			$order['items'] = $this->getFullOrderItems($order);
+			$order['sum'] = $this->getOrderSum($order);
+		}
+		
+		return $orders;
+	}
 
 	private function getNumberOfOrder($clientId) {
 		$ordersQuantity =  Order::where('client_id', '=', $clientId)->count();

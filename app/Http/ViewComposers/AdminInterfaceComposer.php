@@ -111,6 +111,12 @@ class AdminInterfaceComposer {
 			case 'admins':
 				$this->env = 'admins';
 				break;
+			case 'admin':
+				$this->env = 'admin';
+				break;
+			case 'admin_item_month':
+				$this->env = 'search';
+				break;
 			case 'create_admin':
 				$this->env = 'create_admin';
 				break;
@@ -134,6 +140,12 @@ class AdminInterfaceComposer {
 				break;
 			case 'change_sale_page':
 				$this->env = 'admin_sale_change';
+				break;
+			case 'nt_items_admin':
+				$this->env = 'search';
+				break;
+			case 'nd_items_admin':
+				$this->env = 'search';
 				break;
 		}
 	}
@@ -225,6 +237,9 @@ class AdminInterfaceComposer {
 				$this->pageTitle = "Администраторы";
 				break;
 			case 'new_admin':
+				$this->pageTitle = "Администратор";
+				break;
+			case 'admin':
 				$this->pageTitle = "Администратор";
 				break;
 			case 'create_admin':

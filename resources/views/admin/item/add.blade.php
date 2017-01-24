@@ -15,7 +15,10 @@
 	</div>
 @stop
 
+
 @section('page-js')
+	{{Html::script('ckeditor/ckeditor.js') }}
+	@include('admin.articles._editor-init')
 	{{Html::script('js/admin/vendor/dropzone.js')}}
 	{{Html::script('js/admin/load-subcategories.js')}}
 	{{Html::script('js/admin/item-clear.js')}}

@@ -56,6 +56,18 @@
 	</div>
 @endif
 <div class="change_item_buttons">
+	@if (isset($pdf->created_by))
+		{{ Form::hidden('created_by', $pdf->created_by) }}
+	@else
+		{{ Form::hidden('created_by', Auth::guard('admin')->user()->cred_id) }}
+	@endif
+	{{ Form::hidden('changed_by', Auth::guard('admin')->user()->cred_id) }}
+	@if (isset($pdf->created_at))
+		{{ Form::hidden('created_at', $pdf->created_at) }}
+	@else
+		{{ Form::hidden('created_at', \Carbon\Carbon::now()) }}
+	@endif
+	{{ Form::hidden('updated_at', \Carbon\Carbon::now()) }}
 	<p class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent clear_item_button low_button">Очистить</p>
 	{{ Form::submit('Сохранить', ['class'=>'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent']) }}
 </div>

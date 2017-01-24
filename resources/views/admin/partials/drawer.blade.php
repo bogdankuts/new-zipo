@@ -29,9 +29,9 @@
 			<a class="mdl-navigation__link @if ( $env == 'create_pdf' || $env == 'change_pdf' ) active_nav @endif" href="{{route('create_pdf')}}">Добавить деталировку</a>
 			<div class="mdl-navigation__devider"></div>
 			
-			<a class="mdl-navigation__link @if ( $env == 'admin_sales') active_nav @endif" href="{{route('admin_sales')}}">Распродажи</a>
-{{--			<a class="mdl-navigation__link @if ( $env == 'create_sale' || $env == 'change_pdf' ) active_nav @endif" href="{{route('create_pdf')}}">Добавить деталировку</a>--}}
-			<div class="mdl-navigation__devider"></div>
+			{{--<a class="mdl-navigation__link @if ( $env == 'admin_sales') active_nav @endif" href="{{route('admin_sales')}}">Распродажи</a>--}}
+			{{--<a class="mdl-navigation__link @if ( $env == 'create_sale' || $env == 'change_pdf' ) active_nav @endif" href="{{route('create_pdf')}}">Добавить деталировку</a>--}}
+			{{--<div class="mdl-navigation__devider"></div>--}}
 			
 			@if (Auth::guard('admin')->user()->master)
 				<a class="mdl-navigation__link @if ( $env == 'settings') active_nav @endif" href="{{route('settings')}}">Настройки</a>

@@ -67,6 +67,27 @@ class Client extends Model {
 
 		return $clients;
 	}
+	
+	
+	public function getClientsByQueryAdmin() {
+		$query = trim(request()->get('query'));
+		
+		$clients = Client::where('client_id', $query)
+		               ->orWhere('name', 'like', '%'.$query.'%')
+		               ->orWhere('surname', 'like', '%'.$query.'%')
+		               ->orWhere('phone', $query)
+		               ->orWhere('email', $query)
+		               ->orWhere('company', 'like', '%'.$query.'%')
+		               ->get();
+		
+		foreach($clients as $client) {
+			$client->total_orders = Order::where('client_id', $client->client_id)->count();
+			$client->total_orders_sum = $this->countOrderByClientSum($client->client_id);
+			$client->registered = $this->checkIfClientIsRegistered($client);
+		}
+		
+		return $clients;
+	}
 
 	public function getDetailedClient($clientId) {
 		$client = Client::find($clientId);

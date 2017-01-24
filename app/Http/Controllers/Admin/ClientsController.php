@@ -31,4 +31,20 @@ class ClientsController extends Controller {
 			'orders' => $clientOrders,
 		]);
 	}
+	
+	public function search() {
+		$clients = new Client;
+		$clients = $clients->getClientsByQueryAdmin();
+		$query = request()->get('query');
+		
+		if ($clients->count() == 0) {
+			
+			return redirect()->route('dashboard')->withErrors('По запросу: "'.$query.'" ничего не найдено.');
+		} else {
+			
+			return view('admin.clients.clients')->with([
+				'clients' => $clients,
+			]);
+		}
+	}
 }

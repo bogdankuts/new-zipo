@@ -34,4 +34,36 @@ class CatalogController extends Controller {
 		    'sales'         => Sale::all()
 		]);
 	}
+	
+	public function noTitleItems() {
+		$items = Item::full()->where('meta_title', '')->get();
+		foreach ($items as $item) {
+			$item->meta_title = "Купить $item->title в Санкт-Петербурге";
+			$item->changed_by = 18;
+			$item->save();
+		}
+		return view('admin.catalog.items')->with([
+			'pdfs'		    => Pdf::all(),
+			'procurements'  => Supply::all(),
+			'current'	    => Subcat::find(request()->get('subcat_id')),
+			'items'         => Item::full()->where('meta_title', '')->get(),
+			'sales'         => Sale::all()
+		]);
+	}
+	
+	public function noDescriptionItems() {
+		$items = Item::full()->where('meta_description', '')->get();
+		foreach ($items as $item) {
+			$item->meta_description = "Купить $item->producer - $item->title в Санкт-Петербурге";
+			$item->changed_by = 18;
+			$item->save();
+		}
+		return view('admin.catalog.items')->with([
+			'pdfs'		    => Pdf::all(),
+			'procurements'  => Supply::all(),
+			'current'	    => Subcat::find(request()->get('subcat_id')),
+			'items'         => Item::full()->where('meta_description', '')->get(),
+			'sales'         => Sale::all()
+		]);
+	}
 }

@@ -1,6 +1,6 @@
 @section('header')
-	<div @if($snow == 1)class="snow_container" @endif>
-		<div @if($snow == 1)id="snow" @endif>
+	<div @if($snow == '1')class="snow_container" @endif>
+		<div @if($snow == '1')id="snow" @endif>
 			<header>
 				<hr class="header_top_hr">
 				<div class="container_zipo">
@@ -10,7 +10,7 @@
 							<p class="header_phone">тел. {{$s_phone->value}}</p>
 						</div>
 						<a href="/" class="logo_header">
-							@if($snow == 0)
+							@if($snow == '0')
 								{{ Html::image("img/markup/logo.png", "ЗипОбщепит", ['class'=>'logo_header']) }}
 							@else
 								{{ Html::image("img/markup/logo_winter.png", "ЗипОбщепит", ['class'=>'logo_header']) }}

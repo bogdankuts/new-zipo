@@ -4,6 +4,13 @@
 
 @section('body')
 	<div class="admin_main_content admin_main_content--orders mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+		{{ Form::open(['url' => "/admin/clients/search", 'method' => 'GET', 'class'=>'admin_panel_search']) }}
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label pdf-search">
+			{{ Form::text('query', null, ['class'=>'mdl-textfield__input', 'id' =>'search']) }}
+			<label class="mdl-textfield__label" for="search">Поиск</label>
+		</div>
+		{{ Form::submit('Поиск', ['class'=>'mdl-button mdl-js-button mdl-js-ripple-effect search_submit']) }}
+		{{ Form::close() }}
 		@foreach($clients as $client)
 			<div class="mdl-card mdl-shadow--2dp one_client">
 				<div class="mdl-card__title">

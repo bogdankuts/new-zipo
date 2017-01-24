@@ -2,12 +2,14 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model {
 	public $timestamps = false;
+	public $dates = ['created_at', 'updated_at'];
 	public $primaryKey = 'item_id';
-	protected $fillable = ['code', 'title', 'description', 'price', 'currency', 'photo', 'hit', 'special', 'subcat_id', 'producer_id', 'procurement', 'visits', 'meta_title', 'meta_description'];
+	protected $fillable = ['code', 'title', 'description', 'price', 'currency', 'photo', 'hit', 'special', 'subcat_id', 'producer_id', 'procurement', 'visits', 'meta_title', 'meta_description', 'created_by', 'changed_by', 'created_at', 'updated_at'];
 
 	public function pdfs() {
 		
@@ -27,6 +29,11 @@ class Item extends Model {
 	public function subcat() {
 		
 		return $this->hasOne(Subcat::class, 'subcat_id', 'subcat_id');
+	}
+	
+	public function admin() {
+		
+		return $this->belongsTo(Admin::class);
 	}
 
 	/**
@@ -74,6 +81,21 @@ class Item extends Model {
 
 			return $value;
 		}
+	}
+	
+	public static function getByMonth($month) {
+		$currentYear = Carbon::now()->year;
+		$prevYear = $currentYear -1;
+		//$month = $month +1;
+		//if($month < 10) {
+		//	$month = "0$month";
+		//}
+		$items = Item::where('created_at', '>', "$prevYear-31-12")
+					 ->where('created_at', '>=', "$currentYear-$month-01")
+					 ->where('created_at', '<=', "$currentYear-$month-31")
+					 ->count();
+		
+		return $items;
 	}
 
 	/**

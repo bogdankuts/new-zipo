@@ -73,6 +73,8 @@ class UserInterfaceComposer {
 
 		$this->primary_phone = Setting::find(9);
 		$this->secondary_phone = Setting::find(10);
+		
+		$this->winterDecoration = Setting::find(18);
 	}
 
 	/**
@@ -89,7 +91,7 @@ class UserInterfaceComposer {
 			'recent'	=> Recent::readAllRecent(),
 		    'p_phone'   => $this->primary_phone,
 		    's_phone'   => $this->secondary_phone,
-		    'snow'      => $this->winterDecoration
+		    'snow'      => $this->winterDecoration->value
 		]);
 
 		//view()->share('user', \Auth::user());

@@ -8,6 +8,7 @@ class Pdf extends Model {
 	protected $guarded = [];
 	public $timestamps = false;
 	public $primaryKey = 'pdf_id';
+	public $dates = ['created_at', 'updated_at'];
 
 	public function producer() {
 		return $this->hasOne(Producer::class, 'producer_id', 'producer_id');
@@ -117,5 +118,18 @@ class Pdf extends Model {
 	
 	public static function resetSubcategory($subcatId) {
 		Pdf::where('subcat_id', $subcatId)->update(['subcat_id' => 0]);
+	}
+	
+	public static function getPdfsByQueryAdmin() {
+		$query = trim(request()->get('query'));
+		
+		$items = Pdf::with('producer')
+		             ->with('subcat')
+					 ->where('good', 'like', '%'.$query.'%')
+		             ->orWhere('pdf_id', 'like', '%'.$query.'%')
+					 ->orderBy('good', 'asc')
+		             ->get();
+		
+		return $items;
 	}
 }

@@ -30,8 +30,41 @@
 							<td class="mdl-data-table__cell--non-numeric">Заходил последний раз</td>
 							<td>{{$admin->last_visit}}</td>
 						</tr>
+						<tr>
+							<td class="mdl-data-table__cell--non-numeric">Всего добавлено товаров</td>
+							<td>{{$admin->items->count()}}</td>
+						</tr>
+						<tr>
+							<td class="mdl-data-table__cell--non-numeric">Всего изменено товаров</td>
+							<td>{{$admin->changedItems->count()}}</td>
+						</tr>
+						<tr>
+							<td class="mdl-data-table__cell--non-numeric">Добавлено товаров <br>за прошлый месяц</td>
+							<td>{{$admin->items_last_month}}</td>
+						</tr>
+						<tr>
+							<td class="mdl-data-table__cell--non-numeric">Добавлено товаров <br>в этом месяце</td>
+							<td>{{$admin->items_this_month}}</td>
+						</tr>
+						<tr>
+							<td class="mdl-data-table__cell--non-numeric">Всего добавлено деталировок</td>
+							<td>{{$admin->pdfs->count()}}</td>
+						</tr>
+						<tr>
+							<td class="mdl-data-table__cell--non-numeric">Добавлено деталировок <br>за прошлый месяц</td>
+							<td>{{$admin->pdfs_last_month}}</td>
+						</tr>
+						<tr>
+							<td class="mdl-data-table__cell--non-numeric">Добавлено деталировок <br>в этом месяце</td>
+							<td>{{$admin->pdfs_this_month}}</td>
+						</tr>
 						</tbody>
 					</table>
+				</div>
+				<div class="mdl-card__actions mdl-card--border">
+					<a href="{{route('admin', [$admin->cred_id])}}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+						Подробнее
+					</a>
 				</div>
 				@if (Auth::guard('admin')->user()->master)
 					<div class="mdl-card__menu">

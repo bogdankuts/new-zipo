@@ -74,6 +74,7 @@ class ComposerServiceProvider extends ServiceProvider
 		               'admins.admins',
 		               'admins.add',
 		               'admins.change',
+		               'admins.admin',
 		               'settings.settings',
 		               'deliveries.deliveries',
 		               'about.about',

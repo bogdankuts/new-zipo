@@ -34,8 +34,28 @@ class Admin extends Authenticatable {
 	public $primaryKey = 'cred_id';
 
 	protected $table = 'creds';
-
-
+	
+	
+	public function items() {
+		
+		return $this->hasMany(Item::class, 'created_by', 'cred_id');
+	}
+	
+	public function changedItems() {
+		
+		return $this->hasMany(Item::class, 'changed_by', 'cred_id')->where('created_by', '<>', $this->cred_id);
+	}
+	
+	public function pdfs() {
+		
+		return $this->hasMany(Pdf::class, 'created_by', 'cred_id');
+	}
+	
+	public function changedPdfs() {
+		
+		return $this->hasMany(Pdf::class, 'changed_by', 'cred_id')->where('created_by', '<>', $this->cred_id);
+	}
+	
 	/**
 	 * Get new admins after last visit
 	 *

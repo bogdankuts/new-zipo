@@ -97,7 +97,7 @@ a:hover {
 .message {
   width: 1132px;
   position: absolute;
-  top: 164px;
+  top: 0;
   font-size: 21px;
   margin-left: 19px;
   z-index: 101; }
@@ -582,6 +582,9 @@ a:hover {
   border-radius: 5px;
   border: 1px solid #e6e6e6;
   text-decoration: none; }
+
+footer {
+  width: 100%; }
 
 .full_screen {
   margin-top: 15px;

@@ -30,21 +30,21 @@
 		@include('user-interface.partials.analytics')
 	</head>
 	<body>
-		@if($snow == 1)
-			<div class="bg_banner" data-location="{{route('one_sale', ['new-year-sale'])}}">
-				@if($snow == 1)
+		@if($snow == '1')
+			{{--<div class="bg_banner" data-location="{{route('one_sale', ['new-year-sale'])}}">--}}
+				@if($snow == '1')
 					<div id="snow"></div>
 				@endif
-			</div>
+			{{--</div>--}}
 		@endif
 		
 		@yield('header')
 		@yield('flash-messages')
 {{--	@include('user-interface.partials.entrance-modal')--}}
 		<div class="container_main">
-			<div class="sale-block">
-				<a href="{{route('one_sale', ['new-year-sale'])}}" class="sale-title">Рождественская распродажа</a>
-			</div>
+			{{--<div class="sale-block">--}}
+				{{--<a href="{{route('one_sale', ['new-year-sale'])}}" class="sale-title">Рождественская распродажа</a>--}}
+			{{--</div>--}}
 			@yield('left_sidebar')
 			@yield('right_sidebar')
 			@yield('body')

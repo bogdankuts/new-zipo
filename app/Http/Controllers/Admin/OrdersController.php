@@ -10,6 +10,24 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class OrdersController extends Controller {
+	
+	public function search() {
+		$orders = new Order();
+		$orders = $orders->getOrdersByQueryAdmin();
+		$query = request()->get('query');
+		
+		if ($orders->count() == 0) {
+			
+			return redirect()->route('dashboard')->withErrors('По запросу: "'.$query.'" ничего не найдено.');
+		} else {
+			
+			return view('admin.orders.orders')->with([
+				'orders'        => $orders,
+				'states'        => State::all(),
+			    'env'           => 'search'
+			]);
+		}
+	}
 
 	public function orders() {
 		$orders = new Order();

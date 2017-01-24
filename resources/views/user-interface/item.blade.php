@@ -111,7 +111,7 @@
 			</div>
 			<div class="item_page_descr">
 				<p class="item_page_descr_title">Описание:</p>
-				<p class="item_page_descr_p">{{$item->description}}</p>
+				<p class="item_page_descr_p">{!! $item->description !!}</p>
 			</div>
 			@if(!$item->sales->isEmpty())
 				<a href="" class="item_order btn btn-default js_item_add" data-id="{{$item->item_id}}" data-price="{{salesPrice($item->price, $item->sales[0]->discount)}}">В корзину</a>

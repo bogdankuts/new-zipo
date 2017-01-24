@@ -136,6 +136,7 @@ Route::group(['namespace' => 'Admin'], function() {
 
 		// ORDERS
 		Route::get('/orders',                                       ['as' => 'admin_orders',            'uses' => 'OrdersController@orders']);
+		Route::get('/orders/search',                                ['as' => 'order_search',            'uses' => 'OrdersController@search']);
 		Route::get('/detailed-order/{id}',                          ['as' => 'admin_order',             'uses' => 'OrdersController@detailedOrder']);
 		Route::post('/change-order-state',                          [                                   'uses' => 'OrdersController@changeOrderState']);
 		Route::post('/delete-order/{id}',                           ['as' => 'delete_order',            'uses' => 'OrdersController@deleteOrder']);
@@ -147,6 +148,7 @@ Route::group(['namespace' => 'Admin'], function() {
 
 		// CLIENTS
 		Route::get('/clients',                                      ['as' => 'admin_clients',           'uses' => 'ClientsController@clients']);
+		Route::get('/clients/search',                               ['as' => 'client_search',           'uses' => 'ClientsController@search']);
 		Route::get('/detailed-client/{id}',                         ['as' => 'admin_client',            'uses' => 'ClientsController@client']);
 
 		// USERS
@@ -155,6 +157,7 @@ Route::group(['namespace' => 'Admin'], function() {
 
 		// PDFS
 		Route::group(['prefix'=>'/pdf'], function() {
+			Route::get('/search',                                   ['as' => 'pdf_serach',              'uses' => 'PdfController@search']);
 			Route::get('/list',                                     ['as' => 'admin_pdfs',              'uses' => 'PdfController@pdfs']);
 			Route::get('/create',                                   ['as' => 'create_pdf',              'uses' => 'PdfController@create']);
 			Route::post('/save',                                    ['as' => 'save_pdf',                'uses' => 'PdfController@save']);
@@ -166,6 +169,9 @@ Route::group(['namespace' => 'Admin'], function() {
 		// ADMINS
 		Route::group(['prefix'=>'/admin'], function() {
 			Route::get('/list',                                     ['as' => 'admins',                  'uses' => 'AdminsController@admins']);
+			Route::get('/admin/{id}',                               ['as' => 'admin',                   'uses' => 'AdminsController@admin']);
+			Route::get('/admin/{id}/items/{month}',                 ['as' => 'admin_item_month',        'uses' => 'AdminsController@adminItemsMonth']);
+			Route::get('/admin/{id}/pdfs/{month}',                  ['as' => 'admin_pdfs_month',        'uses' => 'AdminsController@adminPdfsMonth']);
 			Route::get('/add',                                      ['as' => 'create_admin',            'uses' => 'AdminsController@create']);
 			Route::post('/save',                                    ['as' => 'save_admin',              'uses' => 'AdminsController@save']);
 			Route::get('/change/{id}',                              ['as' => 'change_admin',            'uses' => 'AdminsController@change']);
@@ -183,6 +189,8 @@ Route::group(['namespace' => 'Admin'], function() {
 			Route::post('/set-markup',                              ['as' => 'set_markup',              'uses' => 'SettingsController@setMarkup']);
 			
 		});
+		//DELIVERY
+		
 		Route::group(['prefix'=>'/settings/delivery'], function() {
 			Route::get('/',                                         ['as' => 'admin_delivery',          'uses' => 'DeliveryController@index']);
 			Route::post('/add',                                     ['as' => 'add_delivery',            'uses' => 'DeliveryController@create']);

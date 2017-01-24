@@ -13,6 +13,23 @@ use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 
 class PdfController extends Controller {
+	
+	public function search() {
+		
+		$pdfs = Pdf::getPdfsByQueryAdmin();
+		$query = request()->get('query');
+		
+		if ($pdfs->count() == 0) {
+			
+			return redirect()->route('dashboard')->withErrors('По запросу: "'.$query.'" ничего не найдено.');
+		} else {
+			
+			return view('admin.pdfs.pdfs')->with([
+				'pdfs' => $pdfs,
+			]);
+		}
+		
+	}
 
 	public function ajaxChangePdf() {
 		$ids = request()->get('ids');

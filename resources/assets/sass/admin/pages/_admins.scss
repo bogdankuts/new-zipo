@@ -13,3 +13,51 @@
 	float: left;
 	width: 100%;
 }
+.admin-card {
+	overflow: hidden;
+	width: 32%;
+	margin-left: 0.5%;
+	margin-right: 0.5%;
+	.mdl-card__supporting-text {
+		width: 90%;
+		table {
+			width: 90%;
+		}
+	}
+}
+.detailed-admin {
+	.admin-statistics {
+		width: 100%;
+		float: left;
+	}
+	.stat-block {
+		margin-top: 60px;
+		width: 48%;
+		margin-left: 1%;
+		margin-right: 1%;
+		float: left;
+		.stat-block-title {
+			font-size: 25px;
+			text-align: center;
+			text-transform: uppercase;
+			font-weight: bold;
+			margin-bottom: 20px;
+		}
+		.by-month {
+			table {
+				width: 100%;
+				tr {
+					line-height: 2.5;
+					a {
+						color: $primary-color;
+						&:hover {
+							color: $primary-color;
+							cursor: pointer;
+							text-decoration: none;
+						}
+					}
+				}
+			}
+		}
+	}
+}

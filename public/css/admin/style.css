@@ -1622,6 +1622,9 @@ footer {
 .change-pdf .chosen-container {
   margin-left: 0 !important; }
 
+.pdf-search {
+  width: 100%; }
+
 .submit_admin {
   margin-top: 40px;
   float: right; }
@@ -1636,6 +1639,43 @@ footer {
 .admin_change_admin {
   float: left;
   width: 100%; }
+
+.admin-card {
+  overflow: hidden;
+  width: 32%;
+  margin-left: 0.5%;
+  margin-right: 0.5%; }
+  .admin-card .mdl-card__supporting-text {
+    width: 90%; }
+    .admin-card .mdl-card__supporting-text table {
+      width: 90%; }
+
+.detailed-admin .admin-statistics {
+  width: 100%;
+  float: left; }
+
+.detailed-admin .stat-block {
+  margin-top: 60px;
+  width: 48%;
+  margin-left: 1%;
+  margin-right: 1%;
+  float: left; }
+  .detailed-admin .stat-block .stat-block-title {
+    font-size: 25px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 20px; }
+  .detailed-admin .stat-block .by-month table {
+    width: 100%; }
+    .detailed-admin .stat-block .by-month table tr {
+      line-height: 2.5; }
+      .detailed-admin .stat-block .by-month table tr a {
+        color: #702329; }
+        .detailed-admin .stat-block .by-month table tr a:hover {
+          color: #702329;
+          cursor: pointer;
+          text-decoration: none; }
 
 .about .to_clients {
   display: table;
