@@ -31,7 +31,8 @@ class UserOrder extends Mailable
 	 */
     public function __construct(array $data, array $items, $orderId)
     {
-	    $this->formDiscount($data['registered']);
+	    
+	    $this->formDiscount($data);
 	    $this->formPayment($data['payment']);
 	    $this->items = $items;
 	    $this->countOrderSum();
@@ -122,10 +123,16 @@ class UserOrder extends Mailable
 	 * Set discount value
 	 * @param string $registered
 	 */
-	private function formDiscount($registered) {
-		if ($registered != 0) {
-			$this->discount = Setting::getDiscount();
+	private function formDiscount($data) {
+		$discountReg = 0;
+		$discountPay = 0;
+		if ($data['registered'] != 0) {
+			$discountReg = Setting::getDiscount();
+		} elseif($data['payment'] == 'card') {
+			$discountPay = Setting::getDiscountCard();
 		}
+		
+		$this->discount = max($discountPay, $discountReg);
 	}
 
 	/**

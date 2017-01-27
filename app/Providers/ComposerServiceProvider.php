@@ -79,7 +79,9 @@ class ComposerServiceProvider extends ServiceProvider
 		               'deliveries.deliveries',
 		               'about.about',
 		               'sale.sales',
-		               'sale.change'
+		               'sale.change',
+		               'sale.add'
+		               
 
 		];
 

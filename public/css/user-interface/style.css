@@ -1934,13 +1934,12 @@ footer {
   font-size: 22px; }
 
 .sale-block {
-  background-image: url(../../img/markup/for-sale-2.png);
   background-color: #ffffff;
   height: 200px;
   padding-top: 6px;
-  background-position: 41% 63%;
   background-repeat: no-repeat;
-  position: relative; }
+  position: relative;
+  margin-bottom: 20px; }
 
 .sale-title {
   position: absolute;

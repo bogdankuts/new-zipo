@@ -30,10 +30,10 @@
 						<p class="items_item_currency"></p>
 					</div>
 				@else
-					<div class="items_item_price_div @if(!$item->sales->isEmpty())discounted @endif">
-						@if(!$item->sales->isEmpty())
+					<div class="items_item_price_div @if(!$item->activeSales->isEmpty())discounted @endif">
+						@if(!$item->activeSales->isEmpty())
 							<div class="discount-block">
-								<p>Скидка - {{$item->sales[0]->discount * 100}} %</p>
+								<p>Скидка - {{$item->activeSales[0]->discount * 100}} %</p>
 							</div>
 							<div class="old">
 								<p class="items_item_price">{{ceil($item->price)}}&nbsp</p>

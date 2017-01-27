@@ -30,6 +30,9 @@ class ImageUpload extends Model {
 			case 'article_update':
 				$this->type = 'article';
 				break;
+			case 'delete_article':
+				$this->type = 'article';
+				break;
 			case 'ajax_image':
 				$this->type = 'item';
 				break;
@@ -48,6 +51,18 @@ class ImageUpload extends Model {
 			case 'producer_update':
 				$this->type = 'producer';
 				break;
+			case 'ajax_image_sale':
+				$this->type = 'sale';
+				break;
+			case 'save_sale':
+				$this->type = 'sale';
+				break;
+			case 'update_sale':
+				$this->type = 'sale';
+				break;
+			case 'delete_sale':
+				$this->type = 'sale';
+				break;
 		}
 	}
 
@@ -58,7 +73,9 @@ class ImageUpload extends Model {
 		if($this->type == 'article') {
 			$this->path = public_path().DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.'photos'.DIRECTORY_SEPARATOR.'articles';
 		} elseif($this->type == 'item') {
-			$this->path = public_path().DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.'photos'.DIRECTORY_SEPARATOR.'items';
+			$this->path = public_path() . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'photos' . DIRECTORY_SEPARATOR . 'items';
+		} elseif($this->type == 'sale') {
+			$this->path = public_path().DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.'photos'.DIRECTORY_SEPARATOR.'sales';
 		} else {
 			$this->path = public_path().DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.'photos'.DIRECTORY_SEPARATOR.'producers';
 		}
@@ -109,6 +126,8 @@ class ImageUpload extends Model {
 	public function deletePhoto($photo) {
 		if($this->type == 'article') {
 			(\Storage::delete('img/photos/articles/'.$photo));
+		} elseif($this->type == 'sale') {
+			\Storage::delete('img/photos/sales/'.$photo);
 		} else {
 			\Storage::delete('img/photos/items/'.$photo);
 		}
@@ -131,7 +150,9 @@ class ImageUpload extends Model {
 			$filename = 'temp.'.$extension;
 			$file->move($destinationPath, $filename);
 
-			$this->addWatermark($filename);
+			if($this->type != 'sale') {
+				$this->addWatermark($filename);
+			}
 		}
 
 		return response()->json($filename);

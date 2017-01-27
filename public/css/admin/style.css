@@ -1768,4 +1768,17 @@ footer {
 .delete-from-sale {
   float: right; }
 
+.sale-img-preview img.items_item_img {
+  max-height: 200px;
+  max-width: 100%; }
+
+.sale-admin-title h2 {
+  height: 60px; }
+
+.admin-delete-sale {
+  float: right;
+  width: auto !important;
+  margin-top: -250px;
+  margin-right: 140px; }
+
 /*# sourceMappingURL=style.css.map */

@@ -49,7 +49,7 @@ Route::get('/all_pdf/{category}/{producer}/{subcat}',['as' => 'pdf_prod_subcat',
 Route::get('/one_pdf/{category}',                   ['as' => 'one_pdf',             'uses' => "PdfController@onePdf"]);
 
 //SALE
-Route::get('/sale/{sale}',                          ['as' => 'one_sale',             'uses' => "SaleController@oneSale"]);
+Route::get('/sale/{id}/{url}',                     ['as' => 'one_sale',             'uses' => "SaleController@oneSale"]);
 
 
 // ADMIN
@@ -201,13 +201,14 @@ Route::group(['namespace' => 'Admin'], function() {
 		// SALE
 		Route::group(['prefix'=>'/sale'], function() {
 			Route::get('/list',                                     ['as' => 'admin_sales',             'uses' => 'SaleController@sales']);
-			//Route::get('/create',                                   ['as' => 'create_sale',             'uses' => 'SaleController@create']);
-			//Route::post('/save',                                    ['as' => 'save_sale',               'uses' => 'SaleController@save']);
+			Route::get('/create',                                   ['as' => 'create_sale',             'uses' => 'SaleController@create']);
+			Route::post('/save',                                    ['as' => 'save_sale',               'uses' => 'SaleController@save']);
 			Route::get('/change/{id}',                              ['as' => 'change_sale_page',        'uses' => 'SaleController@change']);
 			Route::post('/delete-from-sale/{item_id}',              ['as' => 'delete_from_sale',        'uses' => 'SaleController@deleteFromSale']);
 			Route::post('/add-to-sale',                             ['as' => 'add_to_sale',             'uses' => 'SaleController@addToSale']);
 			Route::post('/update/{id}',                             ['as' => 'update_sale',             'uses' => 'SaleController@update']);
-			//Route::post('/delete/{id}',                             ['as' => 'delete_sale',             'uses' => 'SaleController@delete']);
+			Route::post('/delete/{id}',                             ['as' => 'delete_sale',             'uses' => 'SaleController@delete']);
+			Route::post('/ajax-image',                              ['as' => 'ajax_image_sale',         'uses' => 'SaleController@ajaxSaleImage']);
 		});
 
 		Route::get('/about',                                        ['as' => 'admin_about',             'uses' => 'GeneralController@about']);

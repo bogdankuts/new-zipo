@@ -42,9 +42,11 @@
 		@yield('flash-messages')
 {{--	@include('user-interface.partials.entrance-modal')--}}
 		<div class="container_main">
-			{{--<div class="sale-block">--}}
-				{{--<a href="{{route('one_sale', ['new-year-sale'])}}" class="sale-title">Рождественская распродажа</a>--}}
-			{{--</div>--}}
+			@if(isset($activeSale))
+				<div class="sale-block" style="background-image: url(../../img/photos/sales/{{$activeSale->banner}});">
+					<a href="{{route('one_sale', [$activeSale->id, $activeSale->url])}}" class="sale-title"> </a>
+				</div>
+			@endif
 			@yield('left_sidebar')
 			@yield('right_sidebar')
 			@yield('body')
@@ -62,16 +64,20 @@
 		{{Html::script('js/user-interface/catalog.js')}}
 		{{Html::script('js/user-interface/subcategories.js')}}
 		{{Html::script('js/user-interface/scrollToTop.js')}}
-		{{Html::script('js/user-interface/sidebars.js')}}
+		@if(isset($activeSale))
+			{{Html::script('js/user-interface/sidebars-banner.js')}}
+		@else
+			{{Html::script('js/user-interface/sidebars.js')}}
+		@endif
 		{{Html::script('js/user-interface/cart.js')}}
 
 		@yield('page-js')
 		
-		<script>
-			$('.bg_banner').on('click', function () {
-				window.location = $(this).data("location");
-			})
-		</script>
+		{{--<script>--}}
+			{{--$('.bg_banner').on('click', function () {--}}
+				{{--window.location = $(this).data("location");--}}
+			{{--})--}}
+		{{--</script>--}}
 
 		{{--@if($modal)--}}
 			{{--<script>--}}

@@ -20,6 +20,11 @@ class Item extends Model {
 		
 		return $this->belongsToMany(Sale::class, 'item_sale');
 	}
+	
+	public function activeSales() {
+		
+		return $this->belongsToMany(Sale::class, 'item_sale')->where('start_date', '<', Carbon::now())->where('end_date', '>', Carbon::now());
+	}
 
 	public function producer() {
 		

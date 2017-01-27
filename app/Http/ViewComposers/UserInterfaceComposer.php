@@ -4,6 +4,7 @@ namespace App\Http\ViewComposers;
 
 use App\Article;
 use App\Recent;
+use App\Sale;
 use App\Setting;
 use Carbon\Carbon;
 use Illuminate\View\View;
@@ -15,6 +16,7 @@ class UserInterfaceComposer {
 	protected $primary_phone;
 	protected $secondary_phone;
 	protected $winterDecoration = 0;
+	protected $activeSale;
 
 
 	public function __construct() {
@@ -75,6 +77,8 @@ class UserInterfaceComposer {
 		$this->secondary_phone = Setting::find(10);
 		
 		$this->winterDecoration = Setting::find(18);
+		
+		$this->activeSale = Sale::getActiveSale();
 	}
 
 	/**
@@ -91,7 +95,8 @@ class UserInterfaceComposer {
 			'recent'	=> Recent::readAllRecent(),
 		    'p_phone'   => $this->primary_phone,
 		    's_phone'   => $this->secondary_phone,
-		    'snow'      => $this->winterDecoration->value
+		    'snow'      => $this->winterDecoration->value,
+		    'activeSale'=> $this->activeSale
 		]);
 
 		//view()->share('user', \Auth::user());

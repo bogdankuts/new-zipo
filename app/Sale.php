@@ -2,13 +2,14 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Sale extends Model {
 	
 	protected $dates = ['start_date', 'end_date'];
 	public $timestamps = false;
-	protected $fillable = ['start_date', 'end_date', 'title', 'url', 'description'];
+	protected $fillable = ['start_date', 'end_date', 'title', 'url', 'description', 'discount', 'changed_by', 'banner'];
 	
 	public function getRouteKeyName() {
 		
@@ -22,6 +23,7 @@ class Sale extends Model {
 	
 	public function getItems() {
 		$itemsIds = $this->items->pluck('item_id')->toArray();
+		//dd($this);
 		if(count($itemsIds) > 0) {
 			$items = Item::full()->find($itemsIds);
 		} else {
@@ -29,5 +31,12 @@ class Sale extends Model {
 		}
 		
 		return $items;
+	}
+	
+	public static function getActiveSale() {
+		
+		return Sale::where('start_date', '<', Carbon::now())
+		                  ->where('end_date', '>', Carbon::now())
+		                  ->first();
 	}
 }

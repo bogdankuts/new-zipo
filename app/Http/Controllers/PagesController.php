@@ -6,6 +6,7 @@ use App\Article;
 use App\Item;
 use App\Producer;
 use App\Recent;
+use App\Sale;
 use App\Setting;
 use App\Subcat;
 use Carbon\Carbon;

@@ -50,12 +50,12 @@
 					</div>
 				@else
 					<div class="item_price_div">
-						@if(!$item->sales->isEmpty())
+						@if(!$item->activeSales->isEmpty())
 							<div class="old">
 								<p class="item_page_price">{{ceil($item->price)}}&nbsp</p>
 								<p class="item_page_currency">руб.</p>
 							</div>
-							<p class="item_page_price">{{salesPrice($item->price, $item->sales[0]->discount)}}&nbsp</p>
+							<p class="item_page_price">{{salesPrice($item->price, $item->activeSales[0]->discount)}}&nbsp</p>
 						@elseif (Auth::user())
 							<p class="item_page_price">{{discount_price($item->price)}}&nbsp</p>
 						@else
@@ -113,8 +113,8 @@
 				<p class="item_page_descr_title">Описание:</p>
 				<p class="item_page_descr_p">{!! $item->description !!}</p>
 			</div>
-			@if(!$item->sales->isEmpty())
-				<a href="" class="item_order btn btn-default js_item_add" data-id="{{$item->item_id}}" data-price="{{salesPrice($item->price, $item->sales[0]->discount)}}">В корзину</a>
+			@if(!$item->activeSales->isEmpty())
+				<a href="" class="item_order btn btn-default js_item_add" data-id="{{$item->item_id}}" data-price="{{salesPrice($item->price, $item->activeSales[0]->discount)}}">В корзину</a>
 			@elseif (Auth::user())
 				<a href="" class="item_order btn btn-default js_item_add" data-id="{{$item->item_id}}" data-price="{{discount_price($item->price)}}">В корзину</a>
 			@else

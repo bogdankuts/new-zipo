@@ -10,7 +10,8 @@ use App\Http\Requests;
 
 class SaleController extends Controller {
     
-	public function oneSale(Sale $sale) {
+	public function oneSale($id) {
+		$sale = Sale::find($id);
 		
 		return view('user-interface.sale')->with([
 			'sale'  => $sale,

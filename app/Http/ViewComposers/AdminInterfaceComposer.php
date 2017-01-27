@@ -138,6 +138,9 @@ class AdminInterfaceComposer {
 			case 'admin_sales':
 				$this->env = 'admin_sales';
 				break;
+			case 'create_sale':
+				$this->env = 'add_sale';
+				break;
 			case 'change_sale_page':
 				$this->env = 'admin_sale_change';
 				break;
@@ -149,6 +152,7 @@ class AdminInterfaceComposer {
 				break;
 		}
 	}
+
 
 	private function makePageTitle($route) {
 		switch($route) {
@@ -262,6 +266,9 @@ class AdminInterfaceComposer {
 				break;
 			case 'admin_sales':
 				$this->pageTitle = "Распродажи";
+				break;
+			case 'create_sale':
+				$this->pageTitle = "Добавление распродажи";
 				break;
 			case 'change_sale_page':
 				$this->pageTitle = "Изменение распродажи";

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Item;
+use App\Sale;
 use App\Setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -48,7 +49,7 @@ class OrderController extends Controller {
 			$orderData = $this->formDelivery($orderData);
 			$orderData = $this->formPayment($orderData);
 			
-			$items = $this->checkForAllDiscounts($cartItems, $orderData['payment']);//77.6
+			$items = $this->checkForAllDiscounts($cartItems, $orderData['paymentMethod']);//77.6
 
 			return view('user-interface.order.order')->with([
 				'data'          => $orderData,
@@ -70,12 +71,15 @@ class OrderController extends Controller {
 		switch ($data['payment']) {
 			case 'card':
 				$data['payment'] = 'Оплата на карту Сбербанка';
+				$data['paymentMethod'] = 'card';
 				break;
 			case 'check':
 				$data['payment'] = 'Оплата по счету(юр. лица)';
+				$data['paymentMethod'] = 'check';
 				break;
 			case 'physic_check':
 				$data['payment'] = 'Оплата по счету(физ. лица)';
+				$data['paymentMethod'] = 'physic_check';
 				break;
 		}
 		
@@ -186,24 +190,48 @@ class OrderController extends Controller {
 	 */
 	private function checkForAllDiscounts(array $items, $paymentMethod) {
 		$authenticated = \Auth::check();
-		$paidWithCard = false;
-		$discount = Setting::getDiscountCard();
-
+		//$paidWithCard = false;
+		
 		if ($paymentMethod == 'card') {
-			$paidWithCard = true;
+			//$paidWithCard = true;
+			$discount = Setting::getDiscountCard();
+		} else {
+			$discount = 0;
 		}
-
+		
+		if($authenticated != 0) {
+			$authDiscount = intval(Setting::getDiscount());
+		} else {
+			$authDiscount = 0;
+		}
+		
+		if (Sale::getActiveSale() != null) {
+			$saleDiscount = Sale::getActiveSale()->discount*100;
+		} else {
+			$saleDiscount = 0;
+		}
+		
+		$finalDiscount = max($authDiscount, $saleDiscount, $discount);
+		
+		$toDiscount = 1 - intval($finalDiscount) / 100;
+		
 		foreach ($items as $item) {
 			$DBPrice = Item::find($item->id)->price;
-			if (!$item->sales->isEmpty()) {
-				$item->price = salesPrice($item->price, $item->sales[0]->discount);
-			}elseif ($paidWithCard) {
-				$item->price = (1 - intval($discount) / 100) * $DBPrice;
-			} elseif ($authenticated) {
-				$item->price = discount_price($DBPrice);
+			if ($toDiscount != 0) {
+				$item->price = $toDiscount*$DBPrice;
 			} else {
 				$item->price = $DBPrice;
 			}
+			
+			//if (!$item->activeSales->isEmpty()) {
+			//	$item->price = salesPrice($item->price, $item->activeSales[0]->discount);
+			//} elseif ($paidWithCard) {
+			//	$item->price = (1 - intval($discount) / 100) * $DBPrice;
+			//} elseif ($authenticated) {
+			//	$item->price = discount_price($DBPrice);
+			//} else {
+			//	$item->price = $DBPrice;
+			//}
 		}
 
 		return $items;

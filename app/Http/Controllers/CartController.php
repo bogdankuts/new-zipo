@@ -7,6 +7,7 @@ use App\Item;
 use App\Mail\AdminOrder;
 use App\Mail\UserOrder;
 use App\Order;
+use App\Sale;
 use App\Setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -148,28 +149,52 @@ class CartController extends Controller {
 	private function checkForAllDiscounts(array $items, $paymentMethod) {
 		if ($items != emptyArray()) {
 			$authenticated = \Auth::check();
-			$paidWithCard = false;
-			$discount = Setting::getDiscountCard();
-
-			if ($paymentMethod === 'card') {
-				$paidWithCard = true;
+			//$paidWithCard = false;
+			
+			if ($paymentMethod == 'card') {
+				//$paidWithCard = true;
+				$discount = Setting::getDiscountCard();
+			} else {
+				$discount = 0;
 			}
-
+			
+			if($authenticated != 0) {
+				$authDiscount = intval(Setting::getDiscount());
+			} else {
+				$authDiscount = 0;
+			}
+			
+			if (Sale::getActiveSale() != null) {
+				$saleDiscount = Sale::getActiveSale()->discount*100;
+			} else {
+				$saleDiscount = 0;
+			}
+			
+			$finalDiscount = max($authDiscount, $saleDiscount, $discount);
+			
+			$toDiscount = 1 - intval($finalDiscount) / 100;
+			
 			foreach ($items as $item) {
 				$DBPrice = Item::find($item->id)->price;
-				
-				if (!$item->sales->isEmpty()) {
-					$item->price = salesPrice($item->price, $item->sales[0]->discount);
-				}elseif ($paidWithCard) {
-					$item->price = (1 - intval($discount) / 100) * $DBPrice;
-				} elseif ($authenticated) {
-					$item->price = discount_price($DBPrice);
+				if ($toDiscount != 0) {
+					$item->price = $toDiscount*$DBPrice;
 				} else {
 					$item->price = $DBPrice;
 				}
+				
+				//if (!$item->activeSales->isEmpty()) {
+				//	$item->price = salesPrice($item->price, $item->activeSales[0]->discount);
+				//} elseif ($paidWithCard) {
+				//	$item->price = (1 - intval($discount) / 100) * $DBPrice;
+				//} elseif ($authenticated) {
+				//	$item->price = discount_price($DBPrice);
+				//} else {
+				//	$item->price = $DBPrice;
+				//}
 			}
-
+			
 			return $items;
+			
 		}
 
 		return redirect()->back()->withErrors('Нет товаров в корзине!');
@@ -189,7 +214,7 @@ class CartController extends Controller {
 		}
 		$data['registered'] = $dataPost['registered'];
 		$data['comment'] = $dataPost['comment'];
-
+		
 		return $data;
 	}
 
