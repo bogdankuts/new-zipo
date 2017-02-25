@@ -15,7 +15,7 @@
 			<div class="radio">
 				<label>
 					<input type="radio" name="payment" id="physic_pay_card" value="card" class="pay_radio">
-					Оплата на карту "Сбербанка"(скидка {{$discountCard}}%)
+					Оплата на карту "Сбербанка"(скидка {{$discountCard}}%, скидки не суммируются)
 				</label>
 			</div>
 			<div class="radio">

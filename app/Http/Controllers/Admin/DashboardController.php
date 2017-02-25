@@ -40,13 +40,7 @@ class DashboardController extends Controller {
 				'discount'              => Setting::getDiscount(),
 				'allItems'              => Item::all()->count(),
 				'allArticles'           => Article::all()->count(),
-				'allPdfs'               => Pdf::all()->count(),
-				'noMetaItems'           => $this->countIncorrectEnteties('items'),
-				'noTitleItems'          => $this->countNoTitleEnteties('items'),
-				'noDescriptionItems'    => $this->countNoDescriptionEnteties('items'),
-				'noMetaArticles'        => $this->countIncorrectEnteties('articles'),
-				'noTitleArticles'       => $this->countNoTitleEnteties('articles'),
-				'noDescriptionArticles' => $this->countNoDescriptionEnteties('articles'),
+				'allPdfs'               => Pdf::all()->count()
 			]);
 		} else {
 

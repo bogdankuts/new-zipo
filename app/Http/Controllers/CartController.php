@@ -9,6 +9,8 @@ use App\Mail\UserOrder;
 use App\Order;
 use App\Sale;
 use App\Setting;
+use App\Support\Curl;
+use App\Support\SMS;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -40,6 +42,10 @@ class CartController extends Controller {
 		$orderId = $this->addOrderToDB($data, $clientId, $orderItems);
 
 		$this->sendEmails($data, $orderId, $orderItems);
+		
+		//$sms = new SMS($orderId);
+		//$sms->sendSMS($data['phone']);
+		//$this->sendSMS();
 
 		$this->clearCart();
 
@@ -164,19 +170,22 @@ class CartController extends Controller {
 				$authDiscount = 0;
 			}
 			
-			if (Sale::getActiveSale() != null) {
-				$saleDiscount = Sale::getActiveSale()->discount*100;
-			} else {
-				$saleDiscount = 0;
-			}
+			//if (Sale::getActiveSale() != null) {
+			//	$saleDiscount = Sale::getActiveSale()->discount*100;
+			//} else {
+			//	$saleDiscount = 0;
+			//}
 			
-			$finalDiscount = max($authDiscount, $saleDiscount, $discount);
+			$finalDiscount = max($authDiscount, $discount);
 			
 			$toDiscount = 1 - intval($finalDiscount) / 100;
 			
 			foreach ($items as $item) {
 				$DBPrice = Item::find($item->id)->price;
-				if ($toDiscount != 0) {
+				if (!Item::find($item->id)->activeSales->isEmpty()) {
+					$item->price = (1-Sale::getActiveSale()->discount) * $DBPrice;
+					//dd($item->price);
+				} elseif ($toDiscount != 0) {
 					$item->price = $toDiscount*$DBPrice;
 				} else {
 					$item->price = $DBPrice;

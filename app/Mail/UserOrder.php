@@ -128,7 +128,8 @@ class UserOrder extends Mailable
 		$discountPay = 0;
 		if ($data['registered'] != 0) {
 			$discountReg = Setting::getDiscount();
-		} elseif($data['payment'] == 'card') {
+		}
+		if($data['payment'] == 'card') {
 			$discountPay = Setting::getDiscountCard();
 		}
 		

@@ -77,7 +77,6 @@
 			</a>
 		</div>
 	</div>
-	@include('admin.dashboard.no-meta-statistics')
 @stop
 
 @section('page-js')
@@ -88,7 +87,6 @@
 	{{Html::script('js/admin/make-item-hit.js')}}
 	{{Html::script('js/admin/make-order-done.js')}}
 	{{Html::script('js/admin/delete-order.js')}}
-	@include('admin.dashboard.graph-script')
 @stop
 
 

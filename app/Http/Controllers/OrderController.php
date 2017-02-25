@@ -50,6 +50,7 @@ class OrderController extends Controller {
 			$orderData = $this->formPayment($orderData);
 			
 			$items = $this->checkForAllDiscounts($cartItems, $orderData['paymentMethod']);//77.6
+			//dd($items);
 
 			return view('user-interface.order.order')->with([
 				'data'          => $orderData,
@@ -189,53 +190,62 @@ class OrderController extends Controller {
 	 * @return mixed
 	 */
 	private function checkForAllDiscounts(array $items, $paymentMethod) {
-		$authenticated = \Auth::check();
-		//$paidWithCard = false;
-		
-		if ($paymentMethod == 'card') {
-			//$paidWithCard = true;
-			$discount = Setting::getDiscountCard();
-		} else {
-			$discount = 0;
-		}
-		
-		if($authenticated != 0) {
-			$authDiscount = intval(Setting::getDiscount());
-		} else {
-			$authDiscount = 0;
-		}
-		
-		if (Sale::getActiveSale() != null) {
-			$saleDiscount = Sale::getActiveSale()->discount*100;
-		} else {
-			$saleDiscount = 0;
-		}
-		
-		$finalDiscount = max($authDiscount, $saleDiscount, $discount);
-		
-		$toDiscount = 1 - intval($finalDiscount) / 100;
-		
-		foreach ($items as $item) {
-			$DBPrice = Item::find($item->id)->price;
-			if ($toDiscount != 0) {
-				$item->price = $toDiscount*$DBPrice;
+		if ($items != emptyArray()) {
+			$authenticated = \Auth::check();
+			//$paidWithCard = false;
+			
+			if ($paymentMethod == 'card') {
+				//$paidWithCard = true;
+				$discount = Setting::getDiscountCard();
 			} else {
-				$item->price = $DBPrice;
+				$discount = 0;
 			}
 			
-			//if (!$item->activeSales->isEmpty()) {
-			//	$item->price = salesPrice($item->price, $item->activeSales[0]->discount);
-			//} elseif ($paidWithCard) {
-			//	$item->price = (1 - intval($discount) / 100) * $DBPrice;
-			//} elseif ($authenticated) {
-			//	$item->price = discount_price($DBPrice);
+			if ($authenticated != 0) {
+				$authDiscount = intval(Setting::getDiscount());
+			} else {
+				$authDiscount = 0;
+			}
+			
+			//if (Sale::getActiveSale() != null) {
+			//	$saleDiscount = Sale::getActiveSale()->discount*100;
 			//} else {
-			//	$item->price = $DBPrice;
+			//	$saleDiscount = 0;
 			//}
+			
+			$finalDiscount = max($authDiscount, $discount);
+			
+			$toDiscount = 1 - intval($finalDiscount) / 100;
+			
+			foreach ($items as $item) {
+				$DBPrice = Item::find($item->id)->price;
+				//dd($DBPrice);
+				
+				//dd(Item::find($item->id)->activeSales);
+				if (!Item::find($item->id)->activeSales->isEmpty()) {
+					$item->price = (1-Sale::getActiveSale()->discount) * $DBPrice;
+					//dd($item->price);
+					
+				} elseif ($toDiscount != 0) {
+					$item->price = $toDiscount * $DBPrice;
+				} else {
+					$item->price = $DBPrice;
+				}
+				//dd($item->price);
+				
+				//if (!$item->activeSales->isEmpty()) {
+				//	$item->price = salesPrice($item->price, $item->activeSales[0]->discount);
+				//} elseif ($paidWithCard) {
+				//	$item->price = (1 - intval($discount) / 100) * $DBPrice;
+				//} elseif ($authenticated) {
+				//	$item->price = discount_price($DBPrice);
+				//} else {
+				//	$item->price = $DBPrice;
+				//}
+			}
 		}
-
+			
 		return $items;
-
 	}
 
 	/**

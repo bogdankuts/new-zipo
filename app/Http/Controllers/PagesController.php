@@ -9,6 +9,8 @@ use App\Recent;
 use App\Sale;
 use App\Setting;
 use App\Subcat;
+use App\Support\Curl;
+use App\Support\SMS;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
